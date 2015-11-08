@@ -44,12 +44,17 @@ session_start();
 	    	<div class="field">
 	     		<label for="lastN">Last Name</label>
 	      		<input id="lastN" size="20" maxlength="50" type="text" name="lastN" required>
-	   	</div>	
+	   	</div>
 
 		<div class="field">
 	     		<label for="UserN">Username</label>
 	      		<input id="UserN" size="20" maxlength="50" type="text" name="UserN" required>
-	   	</div>	 
+	   	</div>
+
+		<div class="field">
+	     		<label for="Office">Office Location</label>
+	      		<input id="Office" size="20" maxlength="9" type="text" name="Office" required>
+	   	</div>
 
 		<div class="field">
 	     		<label for="PassW">Password</label>
