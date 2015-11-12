@@ -9,7 +9,14 @@ class Base {
 	private $recordExists = false;
 	// Pull outs the record in the database with the given value ($id)
 	// in the column specified by $field, from the table specified by $table
+	// Can pass array to $id to create from already queried row
 	protected __construct($id, $table, $field='id') {
+		if (is_array($id)) {
+			// Given info array from some other query
+			$info = $id;
+			$recordExists = true;
+			return;
+		}
 		// Check for this item in the cache
 		if (isset(self::$cache[$table][$id)) {
 			// In cache, so use cached version
