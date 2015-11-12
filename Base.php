@@ -16,7 +16,7 @@ class Base {
 			$info = self::$cache[$table][$id];
 		} else {
 			// Not in cache, so query database for record from table with id
-			$rs = self::$COMMON->executeQuery("SELECT * FROM $table WHERE `$field`='$id'", $_SEVER["PHP_SELF"]);
+			$rs = self::$COMMON->executeQuery("SELECT * FROM `$table` WHERE `$field`='$id'", $_SEVER["PHP_SELF"]);
 			if ($rs) {
 				// Successful query - set info and cache
 				$info = mysqli_fetch_assoc($rs);

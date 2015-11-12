@@ -32,7 +32,7 @@ class Advisor extends Base {
 		// Check if advisor already exists
 		$rs = $this->doQuery("SELECT `id` FROM Proj2Advisors WHERE `FirstName`='$firstName' AND
 		`LastName`='$lastName' AND `Username`='$username'");
-		if (mysqli_num_rows($rs) > 0) {
+		if (mysql_num_rows($rs) > 0) {
 			// Advisor already exists
 			return false;
 		} else {
