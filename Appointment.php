@@ -5,6 +5,7 @@ class Appointment extends Base {
 		base::__construct($id, 'Proj2Appointments');
 	}
 	
+	/* Raw Table data functions */
 	public getTime() {
 		return $this->getInfo('Time');
 	}
@@ -32,7 +33,13 @@ class Appointment extends Base {
 	public getMeeting() {
 		return $this->getInfo('Meeting');
 	}
+
+	/* Conversion functions */
+	/* TODO: Add function to get full majors */
 	
+	/* Static functions */
+	// Creates new appointment with given time, advisor ID, major, and student capacity.
+	// Returns false if advisor already exists, or true for successful insert
 	public static function createAppointment($time, $advisorID, $major, $max) {
 		// Check for already existing appointment
 		$rs = $this->doQuery("SELECT * FROM `Proj2Appointments` WHERE `Time` = '$time' AND `AdvisorID`='$advisorID'");
@@ -46,6 +53,7 @@ class Appointment extends Base {
 		}
 	}
 	
+	/* Search functions */
 	public static function searchAppointments($date, $times, $advisorID, $major, $openOnly=true) {
 		// Construct query string based on requested search criteria
 		$query = "SELECT * FROM `Proj2Appointments` WHERE `Date` LIKE '$date'";

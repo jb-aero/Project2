@@ -6,6 +6,8 @@ class Advisor extends Base {
 		parent::__construct($id, 'Proj2Advisors');
 	}
 		
+	/* Raw table data functions */
+	
 	public getFirstName() {
 		return $this->getInfo('FirstName');
 	}
@@ -25,6 +27,8 @@ class Advisor extends Base {
 	public getOffice() {
 		return $this->getInfo('Office');
 	}
+	
+	/* Static functions */
 	
 	// Creates a new advisor in the database. Returns false if advisor already exists with
 	// the given first name, last name, and user name. Returns true on successful insert.

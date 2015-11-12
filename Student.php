@@ -7,6 +7,7 @@ class Student extends Base {
 		parent::__construct($id, 'Proj2Students', 'StudentID');
 	}
 	
+	/* Raw table data functions */
 	public getFirstName() {
 		return $this->getInfo('FirstName');
 	}
@@ -25,16 +26,25 @@ class Student extends Base {
 	
 	public getMajor() {
 		// Convert the major acronym to the fully spelled out version
-		return AbbToName($this->getInfo('Major'));
+		return $this->getInfo('Major');
 	}
 	
 	public getStatus() {
 		return $this->getInfo('Status');
 	}
 	
+	/* Conversion functions */
+	// Gets the fully spelled out version of the major
+	public getConvertMajor() {
+		return AbbToName($this->getMajor());
+	}
+
+	/* Static functions */
+	// Creates new student with given first name, last name, student ID, email, and major. The major
+	// should be an acronym. The student by default is given a status of 'N' for no appointment
 	public static createStudent($firstName, $lastName, $studentID, $email, $major) {
-		$this->doQuery("INSERT INTO `Proj2Students` (`FirstName`, `LastName`, `StudentID`, `Email`, `Major`) 
-		VALUES ('$firstName', '$lastName', '$studentID', '$email', '$major'")
+		$this->doQuery("INSERT INTO `Proj2Students` (`FirstName`, `LastName`, `StudentID`, `Email`, `Major`, `Status`) 
+		VALUES ('$firstName', '$lastName', '$studentID', '$email', '$major', 'N'")
 	}
 }
 ?>
