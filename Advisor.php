@@ -1,5 +1,5 @@
 <?php
-require_once 'CommonMethods.php';
+require_once 'Base.php';
 class Advisor extends Base {
 	public __construct($id) {
 		// Get reocrd from Proj2Advisors table with the given id
@@ -30,15 +30,15 @@ class Advisor extends Base {
 	// the given first name, last name, and user name. Returns true on successful insert.
 	public static createAdvisor($firstName, $lastName, $username, $password, $office) {
 		// Check if advisor already exists
-		$rs = $this->doQuery("SELECT `id` FROM Proj2Advisors WHERE `FirstName`=$firstName AND
-		`LastName`=$lastName AND `Username`=$username");
+		$rs = $this->doQuery("SELECT `id` FROM Proj2Advisors WHERE `FirstName`='$firstName' AND
+		`LastName`='$lastName' AND `Username`='$username'");
 		if (mysqli_num_rows($rs) > 0) {
 			// Advisor already exists
 			return false;
 		} else {
 			// Advisor does not exist, so create it
 			$this->doQuery("INSERT INTO Proj2Advisors (`FirstName`, `LastName`, `Username`, `Password`, `Office`
-			VALUES ($firstName, $lastName, $username, $password, $office)");
+			VALUES ('$firstName', '$lastName', '$username', '$password', '$office')");
 			return true;
 		}
 	}
