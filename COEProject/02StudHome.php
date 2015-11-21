@@ -1,5 +1,11 @@
 <?php
-session_start();
+session_start();			
+$debug = false;
+include('../CommonMethods.php');
+$COMMON = new Common($debug);
+
+// Get student information from database
+$student = new Student($COMMON, $_SESSION["studID"]);
 ?>
 
 <html lang="en">
@@ -14,36 +20,23 @@ session_start();
         <div class="top">
 		<h2>Hello 
 		<?php
-			echo $_SESSION["firstN"];
+			echo $student->getFirstName();
 		?>
         </h2>
 	    <div class="selections">
 		<form action="StudProcessHome.php" method="post" name="Home">
 	    <?php
-			$debug = false;
-			include('../CommonMethods.php');
-			$COMMON = new Common($debug);
 			
-			$_SESSION["studExist"] = false;
 			$adminCancel = false;
-			$noApp = false;
-			$studid = $_SESSION["studID"];
-
-			$sql = "select * from Proj2Students where `StudentID` = '$studid'";
-			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-			$row = mysql_fetch_row($rs);
-			
-			if (!empty($row)){
-				$_SESSION["studExist"] = true;
-				if($row[6] == 'C'){
-					$adminCancel = true;
-				}
-				if($row[6] == 'N'){
-					$noApp = true;
-				}
+			$noApp = false;		
+			if($student->getStatus() == 'C'){
+				$adminCancel = true;
+			}
+			if($student->getStatus() == 'N'){
+				$noApp = true;
 			}
 
-			if ($_SESSION["studExist"] == false || $adminCancel == true || $noApp == true){
+			if ($adminCancel == true || $noApp == true){
 				if($adminCancel == true){
 					echo "<p style='color:red'>The advisor has cancelled your appointment! Please schedule a new appointment.</p>";
 				}

@@ -1,12 +1,19 @@
 <?php
 session_start();
 include("Conversion.php");
+include("../CommonMethods.php");
+$debug = false;
+$COMMON = new Common($debug);
 
-$_SESSION["firstN"] = strtoupper($_POST["firstN"]);
-$_SESSION["lastN"] = strtoupper($_POST["lastN"]);
+// See if student is in database
+$student = new Student($COMMON, strtoupper($_POST["studID"]));
+if (!$student->exists()) {
+	// Student does not exist, so create in database
+	Student::createStudent($common, $_POST["firstN"], $_POST["lastN"], $_POST["studID"], $_POST["emai"], NameToAbb($_POST["major"]));
+}
+
+// Save student ID for session
 $_SESSION["studID"] = strtoupper($_POST["studID"]);
-$_SESSION["email"] = $_POST["email"];
-$_SESSION["major"] = NameToAbb($_POST["major"]);
 
 header('Location: 02StudHome.php');
 ?>
