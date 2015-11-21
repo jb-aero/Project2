@@ -80,7 +80,7 @@ class Appointment extends Base {
 		// Construct query string based on requested search criteria
 		// Empty major means all majors
 		$query = "SELECT * FROM `Proj2Appointments` WHERE `Time` LIKE '$date' AND (`Major` LIKE '%$major%' OR `Major` = '') AND 
-			AND `EnrolledID` LIKE '%$studentID%' AND `AdvisorID` ";
+			`EnrolledID` LIKE '%$studentID%' AND `AdvisorID` ";
 		if ($advisorID == 'I') {
 			// All individual appointments
 			$query .= "!= '0'";
