@@ -24,7 +24,6 @@ class Base {
 		$rs = $this->COMMON->executeQuery("SELECT * FROM `$table` WHERE `$field`='$id'", $_SEVER["PHP_SELF"]);
 		if ($rs && mysql_num_rows($rs) > 0) {
 			// Successful query - set info and cache
-			var_dump(mysql_fetch_assoc($rs));
 			$this->info = mysql_fetch_assoc($rs);
 			$this->recordExists = true;
 		}
