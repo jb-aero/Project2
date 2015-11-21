@@ -83,7 +83,7 @@ class Appointment extends Base {
 			AND `EnrolledID` LIKE '%$studentID%' AND `AdvisorID` ";
 		if ($advisorID == 'I') {
 			// All individual appointments
-			$query .= "!= '0'"
+			$query .= "!= '0'";
 		} else {
 			// Group or specific advisor
 			$query .= "= '$advisorID'";
@@ -96,7 +96,7 @@ class Appointment extends Base {
 				$query .= "<";
 			} else {
 				// Closed appointments only
-				$query .= "="
+				$query .= "=";
 			}
 			$query .= " `Max`";
 		}

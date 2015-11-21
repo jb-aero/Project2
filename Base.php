@@ -63,7 +63,7 @@ class Base {
 		// Set debug status, and update common, if it's been initalized
 		$this->$debug = $debug;
 		if ($this->$COMMON !== null) {
-			$this->$COMMON->$debug = $debug
+			$this->$COMMON->$debug = $debug;
 		}
 	}
 }
