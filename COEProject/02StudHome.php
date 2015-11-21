@@ -2,6 +2,7 @@
 session_start();			
 $debug = false;
 include('../CommonMethods.php');
+include('../Student.php');
 $COMMON = new Common($debug);
 
 // Get student information from database
