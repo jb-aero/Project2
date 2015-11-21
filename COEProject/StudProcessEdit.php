@@ -1,16 +1,17 @@
 <?php
 session_start();
+include("Conversion.php");
 
 $_SESSION["firstN"] = strtoupper($_POST["firstN"]);
 $_SESSION["lastN"] = strtoupper($_POST["lastN"]);
 $_SESSION["email"] = $_POST["email"];
-$_SESSION["major"] = $_POST["major"];
+$_SESSION["major"] = NameToAbb($_POST["major"]);
 
 $firstn = strtoupper($_POST["firstN"]);
 $lastn = strtoupper($_POST["lastN"]);
 $studid = $_SESSION["studID"];
 $email = $_POST["email"];
-$major = $_POST["major"];
+$major = NameToAbb($_POST["major"]);
 
 $debug = false;
 include('../CommonMethods.php');
