@@ -1,30 +1,30 @@
 <?php
 require_once 'Base.php';
 class Advisor extends Base {
-	public __construct($id) {
-		// Get reocrd from Proj2Advisors table with the given id
+	public function __construct($id) {
+		// Get record from Proj2Advisors table with the given id
 		parent::__construct($id, 'Proj2Advisors');
 	}
 		
 	/* Raw table data functions */
 	
-	public getFirstName() {
+	public function getFirstName() {
 		return $this->getInfo('FirstName');
 	}
 	
-	public getLastName() {
+	public function getLastName() {
 		return $this->getInfo('LastName');
 	}
 	
-	public getUsername() {
+	public function getUsername() {
 		return $this->getInfo('Username');
 	}
 	
-	public getPassword() {
+	public function getPassword() {
 		return $this->getInfo('Password');
 	}
 	
-	public getOffice() {
+	public function getOffice() {
 		return $this->getInfo('Office');
 	}
 	
@@ -32,7 +32,7 @@ class Advisor extends Base {
 	
 	// Creates a new advisor in the database. Returns false if advisor already exists with
 	// the given first name, last name, and user name. Returns true on successful insert.
-	public static createAdvisor($firstName, $lastName, $username, $password, $office) {
+	public static function createAdvisor($firstName, $lastName, $username, $password, $office) {
 		// Check if advisor already exists
 		$rs = $this->doQuery("SELECT `id` FROM Proj2Advisors WHERE `FirstName`='$firstName' AND
 		`LastName`='$lastName' AND `Username`='$username'");

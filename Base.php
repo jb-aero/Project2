@@ -10,7 +10,7 @@ class Base {
 	// Pull outs the record in the database with the given value ($id)
 	// in the column specified by $field, from the table specified by $table
 	// Can pass array to $id to create from already queried row
-	protected __construct($id, $table, $field='id') {
+	protected function __construct($id, $table, $field='id') {
 		if (is_array($id)) {
 			// Given info array from some other query
 			$info = $id;
@@ -34,7 +34,7 @@ class Base {
 	}
 	
 	// Get a specific piece of information
-	public getInfo($key) {
+	public function getInfo($key) {
 		if (isset($info[$key])) {
 			return $info[$key];
 		} else {
@@ -43,17 +43,17 @@ class Base {
 		}
 	}
 	
-	public getID() {
+	public function getID() {
 		return $this->getInfo('id');
 	}
 	
 	// Whether the given record exists in the database or not
-	public exists() {
+	public function exists() {
 		return $this->$recordExists;
 	}
 	
 	// Do a query using COMMON
-	protected static doQuery($query) {
+	protected static function doQuery($query) {
 		if (self::$COMMON == null) {
 			// Common has not been initialized yet, so create and connect to ben38 database
 			self::$COMMON = new Common($debug);
@@ -64,7 +64,7 @@ class Base {
 	}
 	
 	// Set debug status
-	public static setDebug($debug) {
+	public static function setDebug($debug) {
 		// Set debug status, and update common, if it's been initalized
 		self::$debug = $debug;
 		if (self::$COMMON !== null) {

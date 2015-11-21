@@ -1,36 +1,36 @@
 <?php
 require_once 'Base.php';
 class Appointment extends Base {
-	public __construct($id) {
+	public function __construct($id) {
 		base::__construct($id, 'Proj2Appointments');
 	}
 	
 	/* Raw Table data functions */
-	public getTime() {
+	public function getTime() {
 		return $this->getInfo('Time');
 	}
 	
-	public getAdvisorID() {
+	public function getAdvisorID() {
 		return $this->getInfo('AdvisorID');
 	}
 	
-	public getMajor() {
+	public function getMajor() {
 		return $this->getInfo('Major');
 	}
 	
-	public getEnrolledID() {
+	public function getEnrolledID() {
 		return $this->getInfo('EnrolledID');
 	}
 	
-	public getEnrolledNum() {
+	public function getEnrolledNum() {
 		return $this->getInfo('EnrolledNum');
 	}
 	
-	public getMax() {
+	public function getMax() {
 		return $this->getInfo('Max');
 	}
 	
-	public getMeeting() {
+	public function getMeeting() {
 		return $this->getInfo('Meeting');
 	}
 
@@ -38,7 +38,7 @@ class Appointment extends Base {
 	
 	// Convert major acronym list to full values
 	// separator: delimiter to separate full major names in final string
-	function convertMajor($separator=' ') {
+	public function convertMajor($separator=' ') {
 		// Separate the major acronym string into an array of acronyms
 		$majors = explode(' ', $this->getMajor());
 		// Change all acronyms to major names
@@ -66,7 +66,7 @@ class Appointment extends Base {
 		}
 	}
 	
-	/* Search functions */
+	// Search function
 	// date: day for appointment
 	// times: array of times for the appointments
 	// advisorID: 0 = group, 1+ = specific individual advisor, I = all individual advisors
