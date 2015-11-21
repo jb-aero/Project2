@@ -129,7 +129,7 @@ class Appointment extends Base {
 		// Create array of appointments
 		$retArray = array();
 		while ($appt = mysql_fetch_assoc($rs)) {
-			$retArray[] = new Appointment($appt);
+			$retArray[] = new Appointment($common, $appt);
 		}
 		
 		return $retArray;
