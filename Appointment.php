@@ -76,10 +76,10 @@ class Appointment extends Base {
 	// futureOnly: only get appointments after the current date and time
 	// filter: '' = all appointment statuses, 0 = only open appointments, 1 = only closed appointments
 	// studentID: the student ID that must be in the enrolled list; Empty = any students
-	function searchAppointments($common, $date, $advisorID, $major, $times=array(),$limit=30,  $futureOnly=true, $filter=0, $studentID='') {
+	function searchAppointments($common, $date, $advisorID, $major, $times=array(), $limit=30, $futureOnly=true, $filter=0, $studentID='') {
 		// Construct query string based on requested search criteria
 		// Empty major means all majors
-		$query = "SELECT * FROM `Proj2Appointments` WHERE `Time` LIKE '$date' AND (`Major` LIKE '%$major%' OR `Major` = '') AND 
+		$query = "SELECT * FROM `Proj2Appointments` WHERE `Time` LIKE '%$date%' AND (`Major` LIKE '%$major%' OR `Major` = '') AND 
 			`EnrolledID` LIKE '%$studentID%' AND `AdvisorID` ";
 		if ($advisorID == 'I') {
 			// All individual appointments
