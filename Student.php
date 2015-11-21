@@ -44,7 +44,7 @@ class Student extends Base {
 	// should be an acronym. The student by default is given a status of 'N' for no appointment
 	function createStudent($common, $firstName, $lastName, $studentID, $email, $major) {
 		parent::doQuery("INSERT INTO `Proj2Students` (`FirstName`, `LastName`, `StudentID`, `Email`, `Major`, `Status`) 
-		VALUES ('$firstName', '$lastName', '$studentID', '$email', '$major', 'N'", $common);
+		VALUES ('$firstName', '$lastName', '$studentID', '$email', '$major', 'N')", $common);
 	}
 }
 ?>
