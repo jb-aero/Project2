@@ -13,11 +13,11 @@ class Base {
 	// in the column specified by $field, from the table specified by $table
 	// Can pass array to $id to create from already queried row
 	function Base($common, $id, $table, $field='id') {
+		$this->$COMMON = $common;
 		if (is_array($id)) {
 			// Given info array from some other query
 			$this->$info = $id;
 			$this->$recordExists = true;
-			$this->$COMMON = $common;
 			return;
 		}
 

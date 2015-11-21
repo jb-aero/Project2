@@ -2,7 +2,7 @@
 include "Advisor.php";
 include "Student.php";
 include "Appointment.php";
-include "CommonMethods.php";
+include_once "CommonMethods.php";
 $COMMON = new Common(true);
 $advisor = new Advisor($COMMON, 1);
 var_dump($advisor);
