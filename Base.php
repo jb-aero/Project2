@@ -53,7 +53,7 @@ class Base {
 	}
 	
 	// Do a query using COMMON
-	protected doQuery($query) {
+	protected static doQuery($query) {
 		if (self::$COMMON == null) {
 			// Common has not been initialized yet, so create and connect to ben38 database
 			self::$COMMON = new Common($debug);

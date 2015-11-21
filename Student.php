@@ -43,8 +43,8 @@ class Student extends Base {
 	// Creates new student with given first name, last name, student ID, email, and major. The major
 	// should be an acronym. The student by default is given a status of 'N' for no appointment
 	public static createStudent($firstName, $lastName, $studentID, $email, $major) {
-		$this->doQuery("INSERT INTO `Proj2Students` (`FirstName`, `LastName`, `StudentID`, `Email`, `Major`, `Status`) 
-		VALUES ('$firstName', '$lastName', '$studentID', '$email', '$major', 'N'")
+		parent::doQuery("INSERT INTO `Proj2Students` (`FirstName`, `LastName`, `StudentID`, `Email`, `Major`, `Status`) 
+		VALUES ('$firstName', '$lastName', '$studentID', '$email', '$major', 'N'");
 	}
 }
 ?>
