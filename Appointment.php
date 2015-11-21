@@ -69,14 +69,14 @@ class Appointment extends Base {
 	// Search function
 	// common: Database common class
 	// date: day for appointment
-	// times: array of times for the appointments
 	// advisorID: 0 = group, 1+ = specific individual advisor, I = all individual advisors
 	// major: acronym of major that appointment must be available for
+	// times: array of times for the appointments
 	// limit: maximum number of appointments to get; -1 = all
 	// futureOnly: only get appointments after the current date and time
 	// filter: '' = all appointment statuses, 0 = only open appointments, 1 = only closed appointments
 	// studentID: the student ID that must be in the enrolled list; Empty = any students
-	function searchAppointments($common, $date, $times, $advisorID, $major, $limit=30,  $futureOnly=true, $filter=0, $studentID='') {
+	function searchAppointments($common, $date, $advisorID, $major, $times=array(),$limit=30,  $futureOnly=true, $filter=0, $studentID='') {
 		// Construct query string based on requested search criteria
 		// Empty major means all majors
 		$query = "SELECT * FROM `Proj2Appointments` WHERE `Time` LIKE '$date' AND (`Major` LIKE '%$major%' OR `Major` = '') AND 
