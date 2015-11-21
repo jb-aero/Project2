@@ -1,36 +1,36 @@
 <?php
 require_once 'Base.php';
 class Appointment extends Base {
-	public function __construct($id) {
-		base::__construct($id, 'Proj2Appointments');
+	function Appointment($common, $id) {
+		base::Base($common, $id, 'Proj2Appointments');
 	}
 	
 	/* Raw Table data functions */
-	public function getTime() {
+	function getTime() {
 		return $this->getInfo('Time');
 	}
 	
-	public function getAdvisorID() {
+	function getAdvisorID() {
 		return $this->getInfo('AdvisorID');
 	}
 	
-	public function getMajor() {
+	function getMajor() {
 		return $this->getInfo('Major');
 	}
 	
-	public function getEnrolledID() {
+	function getEnrolledID() {
 		return $this->getInfo('EnrolledID');
 	}
 	
-	public function getEnrolledNum() {
+	function getEnrolledNum() {
 		return $this->getInfo('EnrolledNum');
 	}
 	
-	public function getMax() {
+	function getMax() {
 		return $this->getInfo('Max');
 	}
 	
-	public function getMeeting() {
+	function getMeeting() {
 		return $this->getInfo('Meeting');
 	}
 
@@ -38,7 +38,7 @@ class Appointment extends Base {
 	
 	// Convert major acronym list to full values
 	// separator: delimiter to separate full major names in final string
-	public function convertMajor($separator=' ') {
+	function convertMajor($separator=' ') {
 		// Separate the major acronym string into an array of acronyms
 		$majors = explode(' ', $this->getMajor());
 		// Change all acronyms to major names
@@ -53,20 +53,21 @@ class Appointment extends Base {
 	/* Static functions */
 	// Creates new appointment with given time, advisor ID, major, and student capacity.
 	// Returns false if advisor already exists, or true for successful insert
-	public static function createAppointment($time, $advisorID, $major, $max) {
+	function createAppointment($common, $time, $advisorID, $major, $max) {
 		// Check for already existing appointment
-		$rs = $this->doQuery("SELECT * FROM `Proj2Appointments` WHERE `Time` = '$time' AND `AdvisorID`='$advisorID'");
+		$rs = parent::doQuery("SELECT * FROM `Proj2Appointments` WHERE `Time` = '$time' AND `AdvisorID`='$advisorID'", $common);
 		if (mysql_num_rows($rs) > 0) {
 			// Appointment already exists
 			return false;
 		} else {
 			// Create new appointment
-			$this->doQuery("INSERT INTO `Proj2Appointment` (`Time`, `AdvisorID`, `Major`, `Max`)
-			VALUES ('$time', '$advisorID', '$major', '$max'");
+			parent::doQuery("INSERT INTO `Proj2Appointment` (`Time`, `AdvisorID`, `Major`, `Max`)
+			VALUES ('$time', '$advisorID', '$major', '$max'", $common);
 		}
 	}
 	
 	// Search function
+	// common: Database common class
 	// date: day for appointment
 	// times: array of times for the appointments
 	// advisorID: 0 = group, 1+ = specific individual advisor, I = all individual advisors
@@ -75,7 +76,7 @@ class Appointment extends Base {
 	// futureOnly: only get appointments after the current date and time
 	// filter: '' = all appointment statuses, 0 = only open appointments, 1 = only closed appointments
 	// studentID: the student ID that must be in the enrolled list; Empty = any students
-	public static function searchAppointments($date, $times, $advisorID, $major, $limit=30,  $futureOnly=true, $filter=0, $studentID='') {
+	function searchAppointments($common, $date, $times, $advisorID, $major, $limit=30,  $futureOnly=true, $filter=0, $studentID='') {
 		// Construct query string based on requested search criteria
 		// Empty major means all majors
 		$query = "SELECT * FROM `Proj2Appointments` WHERE `Time` LIKE '$date' AND (`Major` LIKE '%$major%' OR `Major` = '') AND 
@@ -123,7 +124,7 @@ class Appointment extends Base {
 		}
 		
 		// Execute query
-		$rs = $this->doQuery($query);
+		$rs = parent::doQuery($query, $common);
 		
 		// Create array of appointments
 		$retArray = array();

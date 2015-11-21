@@ -2,73 +2,68 @@
 require_once 'CommonMethods.php';
 include_once 'COEProject/Conversion.php';
 class Base {
-	private static $debug = false;
-	private static $COMMON = null;
-	private static $cache = array();
-	private $info = array();
-	private $recordExists = false;
+	// All these are meant to be PRIVATE!! DON'T MESS WITH THEM!
+	var $debug = false;
+	var $COMMON = null; // Don't create COMMON until necessary
+	var $info = array();
+	var $recordExists = false;
+	
+	//** THIS FUNCTION IS NOT MEANT TO BE INSTANTIATED **\\
 	// Pull outs the record in the database with the given value ($id)
 	// in the column specified by $field, from the table specified by $table
 	// Can pass array to $id to create from already queried row
-	protected function __construct($id, $table, $field='id') {
+	function Base($common, $id, $table, $field='id') {
 		if (is_array($id)) {
 			// Given info array from some other query
-			$info = $id;
-			$recordExists = true;
+			$this->$info = $id;
+			$this->$recordExists = true;
+			$this->$COMMON = $common;
 			return;
 		}
-		// Check for this item in the cache
-		if (isset(self::$cache[$table][$id)) {
-			// In cache, so use cached version
-			$info = self::$cache[$table][$id];
-		} else {
-			// Not in cache, so query database for record from table with id
-			$rs = self::$COMMON->executeQuery("SELECT * FROM `$table` WHERE `$field`='$id'", $_SEVER["PHP_SELF"]);
-			if ($rs) {
-				// Successful query - set info and cache
-				$info = mysqli_fetch_assoc($rs);
-				self::$cache[$table][$id] = $info;
-				$recordExists = true;
-			}
+
+		// Query database for record from table with id
+		$rs = $this->$COMMON->executeQuery("SELECT * FROM `$table` WHERE `$field`='$id'", $_SEVER["PHP_SELF"]);
+		if ($rs) {
+			// Successful query - set info and cache
+			$this->$info = mysqli_fetch_assoc($rs);
+			$this->$recordExists = true;
 		}
 	}
 	
 	// Get a specific piece of information
-	public function getInfo($key) {
-		if (isset($info[$key])) {
-			return $info[$key];
+	function getInfo($key) {
+		if (isset($this->$info[$key])) {
+			return $this->$info[$key];
 		} else {
 			// Requested key not in info
 			return false;
 		}
 	}
 	
-	public function getID() {
+	function getID() {
 		return $this->getInfo('id');
 	}
 	
 	// Whether the given record exists in the database or not
-	public function exists() {
+	function exists() {
 		return $this->$recordExists;
 	}
 	
 	// Do a query using COMMON
-	protected static function doQuery($query) {
-		if (self::$COMMON == null) {
-			// Common has not been initialized yet, so create and connect to ben38 database
-			self::$COMMON = new Common($debug);
-			self::$COMMON->connect('ben38');
+	function doQuery($query, $COMMON=null) {
+		if (isset($this)) {
+			$COMMON = $this->$COMMON;
 		}
 		// Execute query using common
-		return self::$COMMON->executeQuery($query, $_SERVER['PHP_SELF']);
+		return $COMMON->executeQuery($query, $_SERVER['PHP_SELF']);
 	}
 	
 	// Set debug status
-	public static function setDebug($debug) {
+	function setDebug($debug) {
 		// Set debug status, and update common, if it's been initalized
-		self::$debug = $debug;
-		if (self::$COMMON !== null) {
-			self::$COMMON->$debug = $debug
+		$this->$debug = $debug;
+		if ($this->$COMMON !== null) {
+			$this->$COMMON->$debug = $debug
 		}
 	}
 }
