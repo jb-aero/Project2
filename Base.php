@@ -1,6 +1,6 @@
 <?php
 require_once 'CommonMethods.php';
-include_once 'COEProject/Conversion.php'
+include_once 'COEProject/Conversion.php';
 class Base {
 	private static $debug = false;
 	private static $COMMON = null;
