@@ -90,7 +90,7 @@ class Appointment extends Base {
 		}
 		if ($filter != '') {
 			// Status filter applied
-			$query .= " AND `EnrolledNum` "
+			$query .= " AND `EnrolledNum` ";
 			if ($filter == 0) {
 				// Open appointments only
 				$query .= "<";
