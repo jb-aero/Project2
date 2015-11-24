@@ -2,6 +2,7 @@
 session_start();
 $debug = false;
 include('../CommonMethods.php');
+include('../Advisor.php');
 $COMMON = new Common($debug);
 
 $studID = $_SESSION["studID"];
@@ -32,16 +33,25 @@ $studID = $_SESSION["studID"];
 				$datephp = strtotime($row[1]);
 				
 				if($advisorID != 0){
-					$sql2 = "select * from Proj2Advisors where `id` = '$advisorID'";
-					$rs2 = $COMMON->executeQuery($sql2, $_SERVER["SCRIPT_NAME"]);
-					$row2 = mysql_fetch_row($rs2);
-					$advisorName = $row2[1] . " " . $row2[2];
+					// Individual advisor - Get advisor info from database
+					$advisor = new Advisor($COMMON, $advisorID);
+					$advisorOffice = $advisor->getOffice();
+					$advisorName = $advisor->convertFullName();
 				}
-				else{$advisorName = "Group";}
+				else{
+					// Group advisor
+					$advisorName = "Group";
+				}
 			
 				echo "<label for='info'>";
 				echo "Advisor: ", $advisorName, "<br>";
-				echo "Appointment: ", date('l, F d, Y g:i A', $datephp), "</label>";
+				// If individual advisor, display office location
+				if (isset($advisorOffice)) {
+					echo "Office: ", $advisorOffice, "<br>";
+				}
+				echo "Appointment: ", date('l, F d, Y g:i A', $datephp), "<br>";
+				// Display appointment location
+				echo "Meeting Location: ", $row[7], "</label>";
 			}
 			else // something is up, and there DB table needs to be fixed
 			{
