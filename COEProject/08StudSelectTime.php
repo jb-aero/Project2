@@ -3,19 +3,24 @@ session_start();
 $debug = false;
 
 if(isset($_POST["advisor"])){
-	$_SESSION["advisor"] = $_POST["advisor"];
+	// Came from selecting individual advisor
+	$localAdvisor = $_POST["advisor"];
+} else {
+	// Selected group advisor
+	$localadvisor = 0;
 }
 
-$localAdvisor = $_SESSION["advisor"];
-$localMaj = $_SESSION["major"];
-
 include('../CommonMethods.php');
+include('../Student.php');
+include('../Advisor.php');
+include('../Appointment.php');
 $COMMON = new Common($debug);
 
-$sql = "select * from Proj2Advisors where `id` = '$localAdvisor'";
-$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-$row = mysql_fetch_row($rs);
-$advisorName = $row[1]." ".$row[2];
+$student = new Student($COMMON, $_SESSION['StudID']);
+if ($localAdvisor != 0) {
+	// Get information for individual advisor
+	$advisor = new Advisor($COMMON, $localAdvisor);
+}
 ?>
 
 <html lang="en">
@@ -39,35 +44,34 @@ $advisorName = $row[1]." ".$row[2];
 
 			$curtime = time();
 
-			if ($_SESSION["advisor"] != "Group")  // for individual conferences only
+			// Search for open appointments with given advisor, student's major, and that are in the future
+			$appointments = Appointment::searchAppointments($COMMON, $localAdvisor, $student->getMajor());
+			// Display title
+			if ($_SESSION["advisor"] != 0)  // for individual conferences only
 			{ 
-				$sql = "select * from Proj2Appointments where $temp `EnrolledNum` = 0 
-					and (`Major` like '%$localMaj%' or `Major` = '') and `Time` > '".date('Y-m-d H:i:s')."' and `AdvisorID` = ".$_POST['advisor']." 
-					order by `Time` ASC limit 30";
-				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 				echo "<h2>Individual Advising</h2><br>";
 				echo "<label for='prompt'>Select appointment with ",$advisorName,":</label><br>";
 			}
 			else // for group conferences
 			{
-				$temp = "";
-				if($localAdvisor != "Group") { $temp = "`AdvisorID` = '$localAdvisor' and "; }
-
-				$sql = "select * from Proj2Appointments where $temp `EnrolledNum` < `Max` and `Max` > 1 and (`Major` like '%$localMaj%' or `Major` = '')  and `Time` > '".date('Y-m-d H:i:s')."' order by `Time` ASC limit 30";
-				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 				echo "<h2>Group Advising</h2><br>";
 				echo "<label for='prompt'>Select appointment:</label><br>";
 			}
-			while($row = mysql_fetch_row($rs)){
-				$datephp = strtotime($row[1]);
-				echo "<label for='",$row[0],"'>";
-				echo "<input id='",$row[0],"' type='radio' name='appTime' required value='", $row[1], "'>", date('l, F d, Y g:i A', $datephp) ,"</label><br>\n";
+			// Display all appointment options on screen
+			foreach($appointments as $appt){
+				$datephp = strtotime($appt->getTime());
+				echo "<label for='",$appt->getID(),"'>";
+				echo "<input id='",$appt->getID(),"' type='radio' name='appTime' required value='", $appt->getTime(), "'>", date('l, F d, Y g:i A', $datephp) ,"</label><br>\n";
 			}
 		?>
         </div>
+		<?php 
+		// Do not allow continuing if there are no appointments for this advisor
+		if (count($appointments) > 0): ?>
 	    <div class="nextButton">
 			<input type="submit" name="next" class="button large go" value="Next">
 	    </div>
+		<?php endif; ?>
 		</form>
 		<div>
 		<form method="link" action="02StudHome.php">

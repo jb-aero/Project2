@@ -28,6 +28,10 @@ class Advisor extends Base {
 		return $this->getInfo('Office');
 	}
 	
+	/* Conversion functions */
+	function convertFullName() {
+		return $this->getInfo('FirstName') . ' ' . $this->getInfo('LastName');
+	}
 	/* Static functions */
 	
 	// Creates a new advisor in the database. Returns false if advisor already exists with
