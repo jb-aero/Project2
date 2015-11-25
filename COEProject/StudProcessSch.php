@@ -21,7 +21,7 @@ else{
 	// Get new advisor ID
 	$advisorID = $newAppt->getAdvisorID();
 
-	if(debug) { echo("Advisor -> $advisor<br>\n"); }
+	if($debug) { echo("Advisor -> $advisor<br>\n"); }
 
 
 	// ************************ Lupoli 9-1-2015
