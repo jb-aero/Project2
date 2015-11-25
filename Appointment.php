@@ -76,8 +76,11 @@ class Appointment extends Base {
 	// limit: maximum number of appointments to get; -1 = all
 	// filter: '' = all appointment statuses, 0 = only open appointments, 1 = only closed appointments
 	// studentID: the student ID that must be in the enrolled list; Empty = any students
-	function searchAppointments($common, $advisorID, $major, $date = '', $times=array(), $futureOnly=true, $limit=30, $filter=0, $studentID='') {
+	function searchAppointments($common, $advisorID, $major='', $date = '', $times=array(), $futureOnly=true, $limit=30, $filter=0, $studentID='') {
 		// Change null optional parameters to default values
+		if ($major === null) {
+			$major = '';
+		}
 		if ($date === null) {
 			$date = '';
 		}
@@ -100,13 +103,13 @@ class Appointment extends Base {
 		// Construct query string based on requested search criteria
 		// Empty major means all majors
 		$query = "SELECT * FROM `Proj2Appointments` WHERE `Time` LIKE '%$date%' AND (`Major` LIKE '%$major%' OR `Major` = '') AND 
-			`EnrolledID` LIKE '%$studentID%' AND `AdvisorID` ";
+			`EnrolledID` LIKE '%$studentID%'";
 		if ($advisorID == 'I') {
 			// All individual appointments
-			$query .= "!= '0'";
-		} else {
+			$query .= " AND `AdvisorID` != '0'";
+		} else if ($advisorID != null) {
 			// Group or specific advisor
-			$query .= "= '$advisorID'";
+			$query .= " AND `AdvisorID` = '$advisorID'";
 		}
 		if ($filter != '') {
 			// Status filter applied

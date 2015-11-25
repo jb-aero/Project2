@@ -2,6 +2,9 @@
 session_start();
 $debug = false;
 include('../CommonMethods.php');
+include('../Student.php');
+include('../Appointment.php');
+include('../Advisor.php');
 $COMMON = new Common($debug);
 ?>
 
@@ -18,30 +21,37 @@ $COMMON = new Common($debug);
 		<h1>Cancel Appointment</h1>
 	    <div class="field">
 	    <?php
-			$firstn = $_SESSION["firstN"];
-			$lastn = $_SESSION["lastN"];
+			// Get student info from database
 			$studid = $_SESSION["studID"];
-			$major = $_SESSION["major"];
-			$email = $_SESSION["email"];
+			$student = new Student($COMMON, $studid);
 			
-			$sql = "select * from Proj2Appointments where `EnrolledID` like '%$studid%'";
-			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-			$row = mysql_fetch_row($rs);
-			$oldAdvisorID = $row[2];
-			$oldDatephp = strtotime($row[1]);				
+			// Get student's appointment from database
+			$appointments = Appointment::searchAppointments($COMMON, null, null, null, null, null, null, null, $studid);
+			$appt = $appointments[0];
+			$oldAdvisorID = $appt->getAdvisorID();
+			$oldDatephp = strtotime($appt->getTime());				
 				
 			if($oldAdvisorID != 0){
-				$sql2 = "select * from Proj2Advisors where `id` = '$oldAdvisorID'";
-				$rs2 = $COMMON->executeQuery($sql2, $_SERVER["SCRIPT_NAME"]);
-				$row2 = mysql_fetch_row($rs2);					
-				$oldAdvisorName = $row2[1] . " " . $row2[2];
+				// Individual advisor, so get advisor info
+				$advisor = new Advisor($COMMON, $oldAdvisorID);					
+				$oldAdvisorName = $advisor->convertFullName();
+				$oldAdvisoOffice = $advisor->getOffice();
 			}
-			else{$oldAdvisorName = "Group";}
+			else{
+				// Group advisor
+				$oldAdvisorName = "Group";
+			}
 			
+			// Display current appointment info
 			echo "<h2>Current Appointment</h2>";
 			echo "<label for='info'>";
 			echo "Advisor: ", $oldAdvisorName, "<br>";
-			echo "Appointment: ", date('l, F d, Y g:i A', $oldDatephp), "</label><br>";
+			// Display office for individual advisor
+			if (isset($oldAdvisorOffice)) {
+				echo "Office: ", $oldAdvisorOffice, "<br>";
+			}
+			echo "Appointment: ", date('l, F d, Y g:i A', $oldDatephp), "<br>";
+			echo "Meeting Location: ", $appt->getMeeting(), "</label><br>";
 		?>		
         </div>
 	    <div class="finishButton">
