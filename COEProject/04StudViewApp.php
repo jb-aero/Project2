@@ -3,7 +3,7 @@ session_start();
 $debug = false;
 include('../CommonMethods.php');
 include('../Advisor.php');
-include('../Appointment');
+include('../Appointment.php');
 $COMMON = new Common($debug);
 
 $studID = $_SESSION["studID"];
