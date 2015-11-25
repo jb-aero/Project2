@@ -8,7 +8,8 @@ include('../Advisor.php');
 $COMMON = new Common($debug);
 
 if($_POST["finish"] == 'Cancel'){
-	// Will just go home
+	// Set status to none
+	$stat = 'n';
 }
 else{
 	// Get student info from database
@@ -46,6 +47,11 @@ else{
 		
 		$sql = "update `Proj2Appointments` set `EnrolledNum` = EnrolledNum-1, `EnrolledID` = '$newIDs' where `id`='$oldApptID'";
 		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+		// Status is rescheduled appointment
+		$stat = 'r';
+	} else {
+		// Status is normal appointment scheduling
+		$stat = 'co';
 	}
 	// Schedule new app
 	// Add new student ID to list of ID's and update enrollment total
@@ -58,7 +64,10 @@ else{
 	$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 
 }
-if($debug == false) { header('Location: 12StudExit.php'); }
+if($debug == false) { 
+	// Go to exit page, passing status
+	header("Location: 12StudExit.php?stat=$stat"); 
+}
 
 
 
