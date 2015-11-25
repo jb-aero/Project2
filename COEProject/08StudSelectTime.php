@@ -39,7 +39,7 @@ if ($localAdvisor != 0) {
 		<form action = "10StudConfirmSch.php" method = "post" name = "SelectTime">
 	    <?php
 			// Hidden form field for advisor ID
-			echo "<input type='hidden' name='advisor' value='$localAdvisor'>"
+			echo "<input type='hidden' name='advisor' value='$localAdvisor'>";
 
 // http://php.net/manual/en/function.time.php fpr SQL statements below
 // Comparing timestamps, could not remember. 
