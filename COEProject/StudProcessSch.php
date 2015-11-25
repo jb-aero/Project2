@@ -40,7 +40,7 @@ else{
 	
 	if($_POST["finish"] == 'Reschedule'){
 		// Get info from database about old appointment
-		$oldApptID = $_POSET["oldAppID"];
+		$oldApptID = $_POST["oldAppID"];
 		$oldAppt = new Appointment($COMMON, $oldApptID);
 		//remove stud from EnrolledID
 		$newIDs = str_replace($studid, "", $oldAppt->getEnrolledID());
