@@ -66,7 +66,7 @@ function isStillAvailable($appID)
 {
 	// advisor could be "Group"
 	global $debug; global $COMMON;
-	$sql "select `EnrolledNum`, `Max` from `Proj2Appointments` where `id`='$appID'";  }
+	$sql "select `EnrolledNum`, `Max` from `Proj2Appointments` where `id`='$appID'";
 	$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 	$row = mysql_fetch_row($rs);
 
