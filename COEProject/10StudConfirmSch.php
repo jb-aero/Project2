@@ -32,7 +32,7 @@ session_start();
 			if($reschedule){
 				// Student was already scheduled for appointment
 				$appt = $appointments[0];
-				$oldApptID = $ppt->getID();
+				$oldApptID = $appt->getID();
 				$oldAdvisorID = $appt->getAdvisorID();
 				$oldDatephp = strtotime($appt->getTime());
 				
