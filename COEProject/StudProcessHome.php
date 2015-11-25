@@ -8,7 +8,6 @@ elseif($_POST["selection"] == 'View'){
 	header('Location: 04StudViewApp.php');
 }
 elseif($_POST["selection"] == 'Reschedule'){
-	$_SESSION["resch"] = true;
 	header('Location: 03StudSelectType.php');
 }
 elseif($_POST["selection"] == 'Cancel'){

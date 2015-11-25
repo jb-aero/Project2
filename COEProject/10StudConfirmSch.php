@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION["appTime"] = $_POST["appTime"]; // radio button selection from previous form
 ?>
 
 <html lang="en">
@@ -18,55 +17,86 @@ $_SESSION["appTime"] = $_POST["appTime"]; // radio button selection from previou
 	    <?php
 			$debug = false;
 			include('../CommonMethods.php');
+			include('../Student.php');
+			include('../Advisor.php');
+			include('../Appointment.php');
 			$COMMON = new Common($debug);
 			
-			$firstn = $_SESSION["firstN"];
-			$lastn = $_SESSION["lastN"];
+			// Get student info from database
 			$studid = $_SESSION["studID"];
-			$major = $_SESSION["major"];
-			$email = $_SESSION["email"];
+			$student = new Student($COMMON, $studid);
 			
-			if($_SESSION["resch"] == true){
-				$sql = "select * from Proj2Appointments where `EnrolledID` like '%$studid%'";
-				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-				$row = mysql_fetch_row($rs);
-				$oldAdvisorID = $row[2];
-				$oldDatephp = strtotime($row[1]);
+			// Check if student already has appointment
+			$appointments = Appointment::searchAppointments($COMMON, null, null, null, null, null, null, null, $studid);
+			$reschedule = count($appointments) > 0;
+			if($reschedule){
+				// Student was already scheduled for appointment
+				$appt = $appointments[0];
+				$oldApptID = $ppt->getID();
+				$oldAdvisorID = $appt->getAdvisorID();
+				$oldDatephp = strtotime($appt->getTime());
 				
 				if($oldAdvisorID != 0){
-					$sql2 = "select * from Proj2Advisors where `id` = '$oldAdvisorID'";
-					$rs2 = $COMMON->executeQuery($sql2, $_SERVER["SCRIPT_NAME"]);
-					$row2 = mysql_fetch_row($rs2);
-					$oldAdvisorName = $row2[1] . " " . $row2[2];
+					// Individual advisor - get info from database
+					$oldAdvisor = new Advisor($COMMON, $oldAdvisorID);
+					$oldAdvisorName = $oldAdvisor->convertFullName();
+					$oldAdvisorOffice = $oldAdvisor->getOffice();
 				}
-				else{$oldAdvisorName = "Group";}
+				else{
+					// Group adivising
+					$oldAdvisorName = "Group";
+				}
 				
 				echo "<h2>Previous Appointment</h2>";
 				echo "<label for='info'>";
 				echo "Advisor: ", $oldAdvisorName, "<br>";
-				echo "Appointment: ", date('l, F d, Y g:i A', $oldDatephp), "</label><br>";
+				// Display advisor office for individual advisor
+				if (isset($oldAdvisorOffice)) {
+					echo "Office: ", $oldAdvisorOffice, "<br>";
+				}
+				echo "Appointment: ", date('l, F d, Y g:i A', $oldDatephp), "<br>";
+				// Display meeting location
+				echo "Meeting Location: ", $appt->getMeeting(), "</label><br>";
+				// Hidden input for old appointment ID
+				echo "<input type='hidden' name='oldAppID' value='$oldApptID'>";
 			}
 			
 			$currentAdvisorName;
-			$currentAdvisorID = $_SESSION["advisor"];
-			$currentDatephp = strtotime($_SESSION["appTime"]);
+			$currentAdvisorID = $_POST["advisor"];
+			$currentDatephp = strtotime($_POST["appTime"]);
+			
+			// Get appointment information for current appointment, even if it's taken
+			$appointments = Appointment::searchAppointments($currentAdvisorID, $student->getMajor(), $_POST["appTime"], null, false, 1, '');
+			$currentAppt = $appointments[0];
+			$currentApptID = $currentAppt->getID();
+			
 			if($currentAdvisorID != 0){
-				$sql2 = "select * from Proj2Advisors where `id` = '$currentAdvisorID'";
-				$rs2 = $COMMON->executeQuery($sql2, $_SERVER["SCRIPT_NAME"]);
-				$row2 = mysql_fetch_row($rs2);
-				$currentAdvisorName = $row2[1] . " " . $row2[2];
+				// Individual advisor, so get info from database
+				$currentAdvisor = new Advisor($COMMON, $currentAdvisorID);
+				$currentAdvisorName = $currentAdvisor->convertFullName();
+				$currentAdvisorOffice = $currentAdvisor->getOffice();
 			}
-			else{$currentAdvisorName = "Group";}
+			else{
+				// Group advising appointment
+				$currentAdvisorName = "Group";
+			}
 			
 			echo "<h2>Current Appointment</h2>";
 			echo "<label for='newinfo'>";
 			echo "Advisor: ",$currentAdvisorName,"<br>";
-			echo "Appointment: ",date('l, F d, Y g:i A', $currentDatephp),"</label>";
+			// Display office for individual advisor
+			if (isset($currentAdvisorOffice)) {
+				echo "Office: ", $currentAdvisorOffice, "<br>";
+			}
+			echo "Appointment: ",date('l, F d, Y g:i A', $currentDatephp),"<br>";
+			echo "Meeting Location: ", $currentAppt->getMeeting(), "</label>";
+			// Hidden input for appointment id
+			echo "<input type='hidden' name='appID' value='$currentApptID'>";
 		?>
         </div>
 	    <div class="nextButton">
 		<?php
-			if($_SESSION["resch"] == true){
+			if($reschedule){
 				echo "<input type='submit' name='finish' class='button large go' value='Reschedule'>";
 			}
 			else{

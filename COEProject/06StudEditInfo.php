@@ -3,21 +3,11 @@ session_start();
 
 $debug = false;
 include('../CommonMethods.php');
+include('../Student.php');
 $COMMON = new Common($debug);
 
-$sql = "select * from Proj2Students";
-$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-
-while($row = mysql_fetch_row($rs)){
-	if($row[3] == $_SESSION["studID"]){
-		
-		$_SESSION["firstN"] = $row[1];
-		$_SESSION["lastN"] = $row[2];
-		$_SESSION["email"] = $row[4];
-		$_SESSION["major"] = $row[5];
-	}
-}
-
+// Get student info from database
+$student = new Student($COMMON, $_SESSION["studID"]);
 ?>
 <html lang="en">
 	<head>
@@ -33,19 +23,19 @@ while($row = mysql_fetch_row($rs)){
 			<form action="StudProcessEdit.php" method="post" name="Edit">
 			<div class="field">
 				<label for="firstN">First Name</label>
-				<input id="firstN" size="30" maxlength="50" type="text" name="firstN" required value=<?php echo $_SESSION["firstN"]?>>
+				<input id="firstN" size="30" maxlength="50" type="text" name="firstN" required value=<?php echo $student->getFirstName();?>>
 			</div>
 			<div class="field">
 				<label for="lastN">Last Name</label>
-				<input id="lastN" size="30" maxlength="50" type="text" name="lastN" required value=<?php echo $_SESSION["lastN"]?>>
+				<input id="lastN" size="30" maxlength="50" type="text" name="lastN" required value=<?php echo $student->getLastName();?>>
 			</div>
 			<div class="field">
 				<label for="studID">Student ID</label>
-				<input id="studID" size="30" maxlength="7" type="text" pattern="[A-Za-z]{2}[0-9]{5}" title="AB12345" name="studID" disabled value=<?php echo $_SESSION["studID"]?>>
+				<input id="studID" size="30" maxlength="7" type="text" pattern="[A-Za-z]{2}[0-9]{5}" title="AB12345" name="studID" disabled value=<?php echo $student->getStudentId();?>>
 			</div>
 			<div class="field">
 				<label for="email">E-mail</label>
-				<input id="email" size="30" maxlength="255" type="email" name="email" required value=<?php echo $_SESSION["email"]?>>
+				<input id="email" size="30" maxlength="255" type="email" name="email" required value=<?php echo $student->getEmail();?>>
 			</div>
 			<div class="field">
 					<label for="major">Major</label>
