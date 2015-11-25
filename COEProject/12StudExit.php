@@ -17,16 +17,16 @@ session_start();
 			if($_GET["stat"] == "co"){
 				echo "You have completed your sign-up for an advising appointment.";
 			}
-			elseif($_SESSION["stat"] == "n"){
+			elseif($_GET["stat"] == "n"){
 				echo "You did not sign up for an advising appointment.";
 			}
-			if($_SESSION["stat"] == "ca"){
+			if($_GET["stat"] == "ca"){
 				echo "You have cancelled your advising appointment.";
 			}
-			if($_SESSION["stat"] == "r"){
+			if($_GET["stat"] == "r"){
 				echo "You have changed your advising appointment.";
 			}
-			if($_SESSION["stat"] == "k"){
+			if($_GET["stat"] == "k"){
 				echo "No changes have been made to your advising appointment.";
 			}
 		?>
