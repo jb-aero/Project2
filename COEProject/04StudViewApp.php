@@ -3,6 +3,7 @@ session_start();
 $debug = false;
 include('../CommonMethods.php');
 include('../Advisor.php');
+include('../Appointment');
 $COMMON = new Common($debug);
 
 $studID = $_SESSION["studID"];
@@ -21,16 +22,16 @@ $studID = $_SESSION["studID"];
 		<h1>View Appointment</h1>
 	    <div class="field">
 	    <?php
-			$sql = "select * from Proj2Appointments where `EnrolledID` like '%$studID%'";
-			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+			// Search for appointment with this student
+			$appointments = Appointment::searchAppointments(null, null, null, null, null, null, null, $studID);
 			// if for some reason there really isn't a match, (something got messed up, tell them there really isn't one there)
-			$num_rows = mysql_num_rows($rs);
+			$num_rows = count($appointments);
 
 			if($num_rows > 0)
 			{
-				$row = mysql_fetch_row($rs); // get legit data
-				$advisorID = $row[2];
-				$datephp = strtotime($row[1]);
+				$appt = $appointments[0]; // get legit data
+				$advisorID = $appt->getAdvisorID();
+				$datephp = strtotime($appt->getTime());
 				
 				if($advisorID != 0){
 					// Individual advisor - Get advisor info from database
@@ -51,7 +52,7 @@ $studID = $_SESSION["studID"];
 				}
 				echo "Appointment: ", date('l, F d, Y g:i A', $datephp), "<br>";
 				// Display appointment location
-				echo "Meeting Location: ", $row[7], "</label>";
+				echo "Meeting Location: ", $appt->getMeeting(), "</label>";
 			}
 			else // something is up, and there DB table needs to be fixed
 			{
