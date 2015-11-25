@@ -66,7 +66,7 @@ session_start();
 			$currentDatephp = strtotime($_POST["appTime"]);
 			
 			// Get appointment information for current appointment, even if it's taken
-			$appointments = Appointment::searchAppointments($currentAdvisorID, $student->getMajor(), $_POST["appTime"], null, false, 1, '');
+			$appointments = Appointment::searchAppointments($COMMON, $currentAdvisorID, $student->getMajor(), $_POST["appTime"], null, false, 1, '');
 			$currentAppt = $appointments[0];
 			$currentApptID = $currentAppt->getID();
 			
