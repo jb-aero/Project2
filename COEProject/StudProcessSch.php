@@ -21,7 +21,7 @@ else{
 	// Get new advisor ID
 	$advisorID = $newAppt->getAdvisorID();
 
-	if($debug) { echo("Advisor -> $advisor<br>\n"); }
+	if($debug) { echo("Advisor -> $advisorID<br>\n"); }
 
 
 	// ************************ Lupoli 9-1-2015
@@ -44,6 +44,10 @@ else{
 		$oldAppt = new Appointment($COMMON, $oldApptID);
 		//remove stud from EnrolledID
 		$newIDs = str_replace($studid, "", $oldAppt->getEnrolledID());
+		if ($debug) {
+			echo "Old IDs: " . $oldAppt->getEnrolledID() . "<br>";
+			echo "New IDs: $newIDs<br>";
+		}
 		
 		$sql = "update `Proj2Appointments` set `EnrolledNum` = EnrolledNum-1, `EnrolledID` = '$newIDs' where `id`='$oldApptID'";
 		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
