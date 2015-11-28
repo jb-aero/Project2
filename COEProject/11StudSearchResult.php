@@ -70,78 +70,7 @@ $COMMON = new Common($debug);
 									"<td>". $appointment->convertMajor() . "</td></tr>";
 					array_push($results, $found);
 				}
-				/*if(empty($times)){
-					if($advisor == 'I'){
-						$sql = "select * from Proj2Appointments where `Time` like '%$date%' and `Time` > '".date('Y-m-d H:i:s')."' and `AdvisorID` != 0 and `EnrolledNum` = 0 and `Major` like '%".$_SESSION['major']."%' order by `Time` ASC Limit 30";
-						$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-					}
-					else{
-						$sql = "select * from Proj2Appointments where `Time` like '%$date%' and `Time` > '".date('Y-m-d H:i:s')."' and `AdvisorID` like '%$advisor%' and `EnrolledNum` = 0 and `Major` like '%".$_SESSION['major']."%' order by `Time` ASC Limit 30";
-						$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-					}
-					$row = mysql_fetch_row($rs);
-					$rsA = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-					if($row){
-						
-						while($row = mysql_fetch_row($rsA)){
-							if($row[2] == 0){
-								$advName = "Group";
-							}
-							else{ $advName = getAdvisorName($row); }
-							
-
-
-							$found = 	"<tr><td>". date('l, F d, Y g:i A', strtotime($row[1]))."</td>".
-									"<td>". $advName."</td>". 
-									"<td>". $row[3]. "</td></tr>".
-
-							array_push($results, $found);
-						}
-					}
-				}
-				else{
-					if($advisor == 'I'){
-						foreach($times as $t){
-							$sql = "select * from Proj2Appointments where `Time` like '%$date%' and `Time` > '".date('Y-m-d H:i:s')."' and `Time` like '%$t%' and `AdvisorID` != 0 and `EnrolledNum` = 0 and `Major` like '%".$_SESSION['major']."%' order by `Time` ASC Limit 30";
-							$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-							$row = mysql_fetch_row($rs);
-							$rsA = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-							if($row){
-								while($row = mysql_fetch_row($rsA)){
-									if($row[2] == 0){
-										$advName = "Group";
-									}
-									else{ $advName = getAdvisorName($row); }
-
-							$found = 	"<tr><td>". date('l, F d, Y g:i A', strtotime($row[1]))."</td>".
-									"<td>". $advName."</td>". 
-									"<td>". $row[3]. "</td></tr>".
-									array_push($results, $found);
-								}
-							}
-						}
-					}
-					else{
-						foreach($times as $t){
-							$sql = "select * from Proj2Appointments where `Time` like '%$date%' and `Time` > '".date('Y-m-d H:i:s')."' and `Time` like '%$t%' and `AdvisorID` like '%$advisor%' and `EnrolledNum` = 0 and `Major` like '%".$_SESSION['major']."%' order by `Time` ASC Limit 30";
-							$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-							$row = mysql_fetch_row($rs);
-							if($row){
-								while($row = mysql_fetch_row($rs)){
-									if($row[2] == 0){
-										$advName = "Group";
-									}
-									else{ $advName = getAdvisorName($row); }
-
-							$found = 	"<tr><td>". date('l, F d, Y g:i A', strtotime($row[1]))."</td>".
-									"<td>". $advName."</td>". 
-									"<td>". $row[3]. "</td></tr>".
-									array_push($results, $found);
-								}
-							}
-						}
-					}
-				}*/
+				// Display results on screen
 				if(empty($results)){
 					echo "No results found.<br><br>";
 				}
