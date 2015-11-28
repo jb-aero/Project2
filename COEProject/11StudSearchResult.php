@@ -6,6 +6,9 @@ session_start();
 
 $debug = false;
 include('../CommonMethods.php');
+include('../Appointment.php');
+include('../Student.php');
+include('../Advisor.php');
 $COMMON = new Common($debug);
 ?>
 
@@ -24,6 +27,9 @@ $COMMON = new Common($debug);
 	    <div class="field">
 			<p>Showing results for: </p>
 			<?php
+				// Get student data from database
+				$student = new Student($COMMON, $_SESSION["studID"]);
+				$major = $student->getMajor();
 				$date = $_POST["date"];
 				$times = $_POST["time"];
 				$advisor = $_POST["advisor"];
@@ -49,16 +55,22 @@ $COMMON = new Common($debug);
 				elseif($advisor == 'I'){ echo "Advisor: All individual appointments"; }
 				elseif($advisor == '0'){ echo "Advisor: All group appointments"; }
 				else{
-					$sql = "select * from Proj2Advisors where `id` = '$advisor'";
-					$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-					while($row = mysql_fetch_row($rs)){
-						echo "Advisor: ", $row[1], " ", $row[2];
-					}
+					// Display individual advisor's name
+					echo "Advisor: ", getAdvisorName($advisor);
 				}
 				?>
 				<br><br><label>
 				<?php
-				if(empty($times)){
+				// Get search resulsts for student
+				$appts = Appointment::searchAppointments($COMMON, $advisor, $major, $date, $times);
+				// Add results to array
+				foreach ($appts as $appointment) {
+					$found = "<tr><td>". date('l, F d, Y g:i A', strtotime($appointment->getTime()))."</td>".
+									"<td>". getAdvisorName($appointment->getAdvisorID()) ."</td>". 
+									"<td>". $appointment-convertMajor() . "</td></tr>";
+					array_push($results, $found);
+				}
+				/*if(empty($times)){
 					if($advisor == 'I'){
 						$sql = "select * from Proj2Appointments where `Time` like '%$date%' and `Time` > '".date('Y-m-d H:i:s')."' and `AdvisorID` != 0 and `EnrolledNum` = 0 and `Major` like '%".$_SESSION['major']."%' order by `Time` ASC Limit 30";
 						$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
@@ -129,7 +141,7 @@ $COMMON = new Common($debug);
 							}
 						}
 					}
-				}
+				}*/
 				if(empty($results)){
 					echo "No results found.<br><br>";
 				}
@@ -160,14 +172,22 @@ $COMMON = new Common($debug);
 
 
 // More code reduction by Lupoli - 9/1/15
-// just getting the advisor's name
-function getAdvisorName($row)
+// just getting the advisor's name - use a cache
+function getAdvisorName($id)
 {
 	global $debug; global $COMMON;
-	$sql2 = "select * from Proj2Advisors where `id` = '$row[2]'";
-	$rs2 = $COMMON->executeQuery($sql2, $_SERVER["SCRIPT_NAME"]);
-	$row2 = mysql_fetch_row($rs2);
-	return $row2[1] ." ". $row2[2];
+	static $cache = array();
+	if ($id == 0) {
+		// Group advising
+		return 'Group';
+	}
+	// Check if it's in the cache
+	else if (!isset($cache[$id])) {
+		// Not in cache, so fetch from database and store in cache
+		$cache[$id] = new Advisor($COMMON, $id);
+	}
+	// Return advisor's name from cache
+	return $cache[$id]->convertFullName():
 }
 
 ?>
