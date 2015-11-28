@@ -18,7 +18,7 @@ session_start();
 
     <?php
 	  // Check if user unsuccessfully signed in
-      if(isset($_SESSION["UserID"] === -1)){
+      if($_SESSION["UserID"] === -1){
         echo "<h3 style='color:red'>Invalid Username/Password combination</h3>";
       }
     ?>
