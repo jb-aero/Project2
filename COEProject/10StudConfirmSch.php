@@ -27,7 +27,7 @@ session_start();
 			$student = new Student($COMMON, $studid);
 			
 			// Check if student already has appointment
-			$appointments = Appointment::searchAppointments($COMMON, null, null, null, null, null, null, null, $studid);
+			$appointments = Appointment::searchAppointments($COMMON, null, null, null, null, null, null, '', $studid);
 			$reschedule = count($appointments) > 0;
 			if($reschedule){
 				// Student was already scheduled for appointment
