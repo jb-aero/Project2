@@ -111,7 +111,7 @@ class Appointment extends Base {
 			// Group or specific advisor
 			$query .= " AND `AdvisorID` = '$advisorID'";
 		}
-		if ($filter != '') {
+		if ($filter !== '') {
 			// Status filter applied
 			$query .= " AND `EnrolledNum` ";
 			if ($filter == 0) {
