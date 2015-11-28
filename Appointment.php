@@ -104,7 +104,7 @@ class Appointment extends Base {
 		// Empty major means all majors
 		$query = "SELECT * FROM `Proj2Appointments` WHERE `Time` LIKE '%$date%' AND (`Major` LIKE '%$major%' OR `Major` = '') AND 
 			`EnrolledID` LIKE '%$studentID%'";
-		if ($advisorID == 'I') {
+		if ($advisorID === 'I') {
 			// All individual appointments
 			$query .= " AND `AdvisorID` != '0'";
 		} else if ($advisorID !== null) {

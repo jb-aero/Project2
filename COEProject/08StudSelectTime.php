@@ -7,7 +7,7 @@ if(isset($_POST["advisor"])){
 	$localAdvisor = $_POST["advisor"];
 } else {
 	// Selected group advisor
-	$localadvisor = 0;
+	$localAdvisor = 0;
 }
 
 include('../CommonMethods.php');
