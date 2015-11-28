@@ -49,10 +49,10 @@ if ($localAdvisor != 0) {
 			// Search for open appointments with given advisor, student's major, and that are in the future
 			$appointments = Appointment::searchAppointments($COMMON, $localAdvisor, $student->getMajor());
 			// Display title
-			if ($_SESSION["advisor"] != 0)  // for individual conferences only
+			if ($localAdvisor != 0)  // for individual conferences only
 			{ 
 				echo "<h2>Individual Advising</h2><br>";
-				echo "<label for='prompt'>Select appointment with ",$advisorName,":</label><br>";
+				echo "<label for='prompt'>Select appointment with ",$advisor->convertFullName(),":</label><br>";
 			}
 			else // for group conferences
 			{
