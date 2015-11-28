@@ -2,34 +2,33 @@
 session_start();
 $debug = false;
 include('../CommonMethods.php');
+include('../Student.php');
+include('../Appointment.php');
 $COMMON = new Common($debug);
 
 if($_POST["cancel"] == 'Cancel'){
-	$firstn = $_SESSION["firstN"];
-	$lastn = $_SESSION["lastN"];
+	// Get student info from database
 	$studid = $_SESSION["studID"];
-	$major = $_SESSION["major"];
-	$email = $_SESSION["email"];
+	$student = new Student($COMMON, $studid);
 	
+	// Find student's appointment
+	$appointments = Appointment::searchAppointments($COMMON, null, null, null, null, null, null, null, $studid);
 	//remove stud from EnrolledID
-	$sql = "select * from Proj2Appointments where `EnrolledID` like '%$studid%'";
-	$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-	$row = mysql_fetch_row($rs);
-	$oldAdvisorID = $row[2];
-	$oldAppTime = $row[1];
-	$newIDs = str_replace($studid, "", $row[4]);
+	$appt = $appointments[0];
+	$apptID = $appt->getID();
+	$newIDs = str_replace($studid, "", $appt->getEnrolledID());
 	
-	$sql = "update `Proj2Appointments` set `EnrolledNum` = EnrolledNum-1, `EnrolledID` = '$newIDs' where `AdvisorID` = '$oldAdvisorID' and `Time` = '$oldAppTime'";
+	$sql = "update `Proj2Appointments` set `EnrolledNum` = EnrolledNum-1, `EnrolledID` = '$newIDs' where `id`='$apptID'";
 	$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 	
 	//update stud status to noApp
 	$sql = "update `Proj2Students` set `Status` = 'N' where `StudentID` = '$studid'";
 	$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 	
-	$_SESSION["status"] = "cancel";
+	$stat = 'ca';
 }
 else{
-	$_SESSION["status"] = "keep";
+	$stat = 'k';
 }
-header('Location: 12StudExit.php');
+header("Location: 12StudExit.php?stat=$stat");
 ?>

@@ -18,7 +18,7 @@ The create functions in Advisor and Appointment return false if a similar record
 
 The Appointment class has a searchAppointments() function. The first parameter is an instance of the Common database class. 
 The other parameters are as follows (passing null for any optional parameter will use it's default value):
-	advisorID: 0 = group, 1+ = specific individual advisor, I = all individual advisors [can be ignored with null]
+	advisorID: 0 = group, 1+ = specific individual advisor, I = all individual advisors [can be ignored with null]$
 	major: acronym of major that appointment must be available for [optional; default: '']
 	date: day for appointment; empty = all dates [optional; default: '']
 	times: array of times for the appointments [optional; default: array()]
