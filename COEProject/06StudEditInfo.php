@@ -40,11 +40,11 @@ $student = new Student($COMMON, $_SESSION["studID"]);
 			<div class="field">
 					<label for="major">Major</label>
 					<select id="major" name = "major">
-					<option <?php if($_SESSION["major"] == 'CMPE'){echo("selected");}?>>Computer Engineering</option>
-					<option <?php if($_SESSION["major"] == 'CMSC'){echo("selected");}?>>Computer Science</option>
-					<option <?php if($_SESSION["major"] == 'MENG'){echo("selected");}?>>Mechanical Engineering</option>
-					<option <?php if($_SESSION["major"] == 'CENG'){echo("selected");}?>>Chemical Engineering</option>
-					<option <?php if($_SESSION["major"] == 'ENGR'){echo("selected");}?>>Engineering Undecided</option>
+					<option <?php if($student->getMajor() == 'CMPE'){echo("selected");}?>>Computer Engineering</option>
+					<option <?php if($student->getMajor() == 'CMSC'){echo("selected");}?>>Computer Science</option>
+					<option <?php if($student->getMajor() == 'MENG'){echo("selected");}?>>Mechanical Engineering</option>
+					<option <?php if($student->getMajor() == 'CENG'){echo("selected");}?>>Chemical Engineering</option>
+					<option <?php if($student->getMajor() == 'ENGR'){echo("selected");}?>>Engineering Undecided</option>
 <!-- someday
 					<option <?php if($_SESSION["major"] == 'Africana Studies'){echo("selected");}?>>Africana Studies</option>
 					<option <?php if($_SESSION["major"] == 'American Studies'){echo("selected");}?>>American Studies</option>
