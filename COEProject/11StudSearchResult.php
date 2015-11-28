@@ -67,7 +67,7 @@ $COMMON = new Common($debug);
 				foreach ($appts as $appointment) {
 					$found = "<tr><td>". date('l, F d, Y g:i A', strtotime($appointment->getTime()))."</td>".
 									"<td>". getAdvisorName($appointment->getAdvisorID()) ."</td>". 
-									"<td>". $appointment-convertMajor() . "</td></tr>";
+									"<td>". $appointment->convertMajor() . "</td></tr>";
 					array_push($results, $found);
 				}
 				/*if(empty($times)){
