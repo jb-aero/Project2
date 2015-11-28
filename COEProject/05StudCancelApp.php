@@ -26,7 +26,7 @@ $COMMON = new Common($debug);
 			$student = new Student($COMMON, $studid);
 			
 			// Get student's appointment from database
-			$appointments = Appointment::searchAppointments($COMMON, null, null, null, null, null, null, null, $studid);
+			$appointments = Appointment::searchAppointments($COMMON, null, null, null, null, null, null, '', $studid);
 			$appt = $appointments[0];
 			$oldAdvisorID = $appt->getAdvisorID();
 			$oldDatephp = strtotime($appt->getTime());				

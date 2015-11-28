@@ -12,7 +12,7 @@ if($_POST["cancel"] == 'Cancel'){
 	$student = new Student($COMMON, $studid);
 	
 	// Find student's appointment
-	$appointments = Appointment::searchAppointments($COMMON, null, null, null, null, null, null, null, $studid);
+	$appointments = Appointment::searchAppointments($COMMON, null, null, null, null, null, null, '', $studid);
 	//remove stud from EnrolledID
 	$appt = $appointments[0];
 	$apptID = $appt->getID();
