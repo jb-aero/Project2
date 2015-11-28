@@ -131,10 +131,10 @@ class Appointment extends Base {
 		// Add times to query
 		if (count($times) > 0) {
 			// Add first time
-			$query .= " AND (`Time` LIKE '" . $times[0] . "'";
+			$query .= " AND (`Time` LIKE '%" . $times[0] . "%'";
 			// Add all times after first (use or because it can be any of the given times)
-			for ($i = 0; $i < count($times); $i++) {
-				$query .= " OR `Time` LIKE '" . $times[$i] . "'";
+			for ($i = 1; $i < count($times); $i++) {
+				$query .= " OR `Time` LIKE '%" . $times[$i] . "%'";
 			}
 			$query .= ")";
 		}
