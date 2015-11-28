@@ -16,7 +16,7 @@ include('../Advisor.php');
 include('../Appointment.php');
 $COMMON = new Common($debug);
 
-$student = new Student($COMMON, $_SESSION['StudID']);
+$student = new Student($COMMON, $_SESSION['studID']);
 if ($localAdvisor != 0) {
 	// Get information for individual advisor
 	$advisor = new Advisor($COMMON, $localAdvisor);

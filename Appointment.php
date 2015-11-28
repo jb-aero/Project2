@@ -107,7 +107,7 @@ class Appointment extends Base {
 		if ($advisorID == 'I') {
 			// All individual appointments
 			$query .= " AND `AdvisorID` != '0'";
-		} else if ($advisorID != null) {
+		} else if ($advisorID !== null) {
 			// Group or specific advisor
 			$query .= " AND `AdvisorID` = '$advisorID'";
 		}
