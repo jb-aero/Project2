@@ -187,7 +187,7 @@ function getAdvisorName($id)
 		$cache[$id] = new Advisor($COMMON, $id);
 	}
 	// Return advisor's name from cache
-	return $cache[$id]->convertFullName():
+	return $cache[$id]->convertFullName();
 }
 
 ?>
