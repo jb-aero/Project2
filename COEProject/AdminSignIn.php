@@ -17,7 +17,8 @@ session_start();
 		<h2>Admin Sign In</h2>
 
     <?php
-      if($_SESSION["UserVal"] == true){
+	  // Check if user unsuccessfully signed in
+      if(isset($_SESSION["UserID"] === -1)){
         echo "<h3 style='color:red'>Invalid Username/Password combination</h3>";
       }
     ?>

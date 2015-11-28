@@ -5,8 +5,8 @@ $debug = false;
 if($debug) { echo("Session variables-> ".var_dump($_SESSION)); }
 
 include('../CommonMethods.php');
+include('../Advisor.php');
 $COMMON = new Common($debug);
-$_SESSION["PassCon"] = false;
 ?>
 
 <!DOCTYPE html>
@@ -23,20 +23,16 @@ $_SESSION["PassCon"] = false;
 	<h2> Hello 
 	<?php
 
-	if(!isset($_SESSION["UserN"])) // someone landed this page by accident
+	if(!isset($_SESSION["UserID"])) // someone landed this page by accident
 	{
 		return;
 	}		
 
-		$User = $_SESSION["UserN"];
-		$Pass = $_SESSION["PassW"];
-		$sql = "SELECT `firstName` FROM `Proj2Advisors` 
-			WHERE `Username` = '$User' 
-			and `Password` = '$Pass'";
+		$UserID = $_SESSION["UserID"];
+		// Get advisor info from database
+		$advisor = new Advisor($COMMON, $UserID);
 
-		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-		$row = mysql_fetch_row($rs);
-		echo $row[0];
+		echo $advisor->getFirstName();
 	?>
 	</h2>
 	
