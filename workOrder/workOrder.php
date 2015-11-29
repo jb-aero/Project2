@@ -45,7 +45,7 @@ function stage1($_GET)
     <div class="top">
 
 	<form action="workOrder.php" method='post'>
-	Description: <br><textarea name='description' id='description' rows="5" cols="200"></textarea><br>
+	Description: <br><textarea name='description' id='description' rows="10" cols="400"></textarea><br>
 	Priority: <br><input type="radio" name="priority" value="0" checked>None given<br>
 			<input type="radio" name="priority" value="1">1 (High)<br>
 			<input type="radio" name="priority" value="2">2<br>
