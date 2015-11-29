@@ -40,7 +40,7 @@ function stage1($_GET)
   <body>
     <div id="login">
 	<h2>Work order form for:</h2> 
-	<center><color="red"><?php echo($_GET['url']); ?></center></color>
+	<center><font color="red"><?php echo($_GET['url']); ?></center></font>
 	<br>
 	<br>
 	<br>
