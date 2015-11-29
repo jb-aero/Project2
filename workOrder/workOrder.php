@@ -48,7 +48,7 @@ function stage1($_GET)
     <div class="top">
 
 	<form action="workOrder.php" method='post'>
-	Description: <br><textarea name='description' id='description' rows="5" cols="100"></textarea><br>
+	Description: <br><textarea name='description' id='description' rows="6" cols="100"></textarea><br>
 	Priority: <br>
 			<input type="radio" name="priority" value="1" checked>1 (High) 
 			<input type="radio" name="priority" value="2">2 
@@ -102,7 +102,7 @@ function stage2($_POST)
   </head>
   <body>
     <div id="login">
-	Thank you. Work order entered.
+	<h2>Your work order has been submitted successfully</h2>
 	<form action="">
 	<input type="submit" name="home" class="button large" value="Close" onClick="window.close()">
 	</form>
