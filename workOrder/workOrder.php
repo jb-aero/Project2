@@ -39,8 +39,8 @@ function stage1($_GET)
   </head>
   <body>
     <div id="login">
-	<h2>Work order form for:\n'</h2> 
-	<?php echo($_GET['url']); ?>
+	<h2>Work order form for:</h2> 
+	<center><?php echo($_GET['url']); ?></center>
     <div id="form">
     <div class="top">
 
