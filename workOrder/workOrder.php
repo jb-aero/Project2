@@ -40,7 +40,7 @@ function stage1($_GET)
   <body>
     <div id="login">
 	<h2>Work order form for:</h2> 
-	<center><font size = 15px color="red"><?php echo($_GET['url']); ?></center></font>
+	<center><font size = 8px color="red"><?php echo($_GET['url']); ?></center></font>
 	<br>
 	<br>
 	<br>
@@ -48,8 +48,8 @@ function stage1($_GET)
     <div class="top">
 
 	<form action="workOrder.php" method='post'>
-	<b><font size = 15px>Description:</font></b> <br><br><textarea name='description' id='description' rows="6" cols="100"></textarea><br><br>
-	<b><font size = 15px>Priority:</b></font> <br>
+	<b><font size = 7px>Description:</font></b> <br><br><textarea name='description' id='description' rows="6" cols="100"></textarea><br><br>
+	<b><font size = 7px>Priority:</b></font> <br>
 			<input type="radio" name="priority" value="1" checked>1 (High) 
 			<input type="radio" name="priority" value="2">2 
 			<input type="radio" name="priority" value="3">3<br><br>
