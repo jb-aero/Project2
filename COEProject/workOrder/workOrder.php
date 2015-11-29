@@ -50,9 +50,9 @@ function stage1($_GET)
 	<form action="workOrder.php" method='post'>
 	<b><font size = 2px>Description:</font></b> <br><br><textarea name='description' id='description' rows="6" cols="100"></textarea><br><br>
 	<b><font size = 2px>Priority:</b></font> <br>
-			<input type="radio" name="priority" value="1" checked>1 (Highest)<br>
+			<input type="radio" name="priority" value="1">1 (Highest)<br>
 			<input type="radio" name="priority" value="2">2<br>
-			<input type="radio" name="priority" value="3">3<br>
+			<input type="radio" name="priority" value="3" checked>3<br>
 			<input type="radio" name="priority" value="4">4<br>
 			<input type="radio" name="priority" value="5">5 (Lowest)<br>
 	
