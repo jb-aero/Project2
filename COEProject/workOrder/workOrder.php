@@ -35,20 +35,26 @@ function stage1($_GET)
 	alert("Value: " + stepVal);
     }
     </script>
-	<link rel='stylesheet' type='text/css' href='../../css/standard.css'/>
+	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head>
   <body>
     <div id="login">
-	Work order form for <?php echo($_GET['url']); ?>
+	<h2>Work order form for:</h2> 
+	<center><font size = 3px color="red"><?php echo($_GET['url']); ?></center></font>
+	<br>
+	<br>
+	<br>
     <div id="form">
     <div class="top">
 
 	<form action="workOrder.php" method='post'>
-	Description: <br><textarea name='description' id='description' rows="5" cols="200"></textarea><br>
-	Priority: <br><input type="radio" name="priority" value="0" checked>None given<br>
-			<input type="radio" name="priority" value="1">1 (High)<br>
+	<b><font size = 2px>Description:</font></b> <br><br><textarea name='description' id='description' rows="6" cols="100"></textarea><br><br>
+	<b><font size = 2px>Priority:</b></font> <br>
+			<input type="radio" name="priority" value="1" checked>1 (Highest)<br>
 			<input type="radio" name="priority" value="2">2<br>
 			<input type="radio" name="priority" value="3">3<br>
+			<input type="radio" name="priority" value="4">4<br>
+			<input type="radio" name="priority" value="5">5 (Lowest)<br>
 	
 	<input type="hidden" name="url" value='<?php echo($_GET["url"]); ?>'>
 
@@ -76,7 +82,7 @@ function stage2($_POST)
 {
 	global $debug;
 
-	include('../../CommonMethods.php');
+	include('../CommonMethods.php');
 	$COMMON = new Common($debug);
 
       $sql = "insert into `work_orders` (`id`, `url`, `description`, `priority`, `author`, `time_entered`) values (null, '".$_POST['url']."', '".$_POST['description']."', '".$_POST['priority']."', '".$_SESSION['UserN']."', CURRENT_TIMESTAMP)";
@@ -94,11 +100,11 @@ function stage2($_POST)
 	alert("Value: " + stepVal);
     }
     </script>
-	<link rel='stylesheet' type='text/css' href='../../css/standard.css'/>
+	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head>
   <body>
     <div id="login">
-	Thank you. Work order entered.
+	<h2>Your work order has been submitted successfully</h2>
 	<form action="">
 	<input type="submit" name="home" class="button large" value="Close" onClick="window.close()">
 	</form>
