@@ -48,10 +48,10 @@ function stage1($_GET)
     <div class="top">
 
 	<form action="workOrder.php" method='post'>
-	Description: <br><textarea name='description' id='description' rows="10" cols="400"></textarea><br>
-	Priority: <br><input type="radio" name="priority" value="0" checked>None given<br>
-			<input type="radio" name="priority" value="1">1 (High)
-			<input type="radio" name="priority" value="2">2
+	Description: <br><textarea name='description' id='description' rows="20" cols="200"></textarea><br>
+	Priority: <br>
+			<input type="radio" name="priority" value="1" checked>1 (High) 
+			<input type="radio" name="priority" value="2">2 
 			<input type="radio" name="priority" value="3">3<br>
 	
 	<input type="hidden" name="url" value='<?php echo($_GET["url"]); ?>'>
