@@ -1,6 +1,7 @@
-html{ 
+html{
+	  background-image:url("../images/index.png");
       background-color: 
-      #99CCFF; 
+      #79aca7; 
       font-family: Arial; 
       font-size: 13px; 
       position: relative; 
@@ -23,7 +24,7 @@ html{
       #login{ 
       color: #000; 
       background-color: #fff; 
-      margin: 100px auto 0; 
+      margin: 80px auto 0px; 
       padding: 20px 20px 20px; 
       position: relative; 
       width: 600px; 
@@ -80,7 +81,7 @@ html{
 	  }
       
       .button {
-        background-color: #768089;
+        background-color: #044c57;
         border: none;
         color: #fff;
         cursor: pointer;
@@ -103,7 +104,7 @@ html{
       }
       
       .button:hover {
-        background-color: #87929D;
+        background-color: #669d97;
         color: #fff;
         text-decoration: none;
       }
@@ -120,12 +121,12 @@ html{
       }
       
       .button.go {
-        background-color: #66AA44;
+        background-color: #044c57;
         color: #FFF;
       }
       
       .button.go:hover {
-        background-color: #70B74E;
+        background-color: #669d97;
         color: #FFF;
       }
        
@@ -175,10 +176,40 @@ html{
       font-size: 16px; 
       font-weight: normal; 
       }
-    
+      
       @media screen and (max-width: 767px){
         html, body { background-color: #fff; }
-        #login { border-radius: 0; margin: 60px 0 0; width: 94%; padding: 3%; border-top: 1px solid #ddd; }
+        #login { border-radius: 0; margin: 60px 0 0; width: 94%; padding: 3%; border-top: 0px solid #ddd; }
         input[type="text"],input[type="password"], textarea { width: 96%; padding: 2% 2%; }
         .button-item { margin: 8px 8px 12px; }
       }
+      
+    #umbc-footer-logo{ 
+      margin: 0px auto 0px; 
+      padding: 20px 0px 0px; 
+      position: relative; 
+      width: 600px; 
+      -webkit-border-radius: 8px; 
+      -moz-border-radius: 8px; 
+      border-radius: 8px; 
+      }
+      
+	#umbc-footer-logo a{
+	background-image:url('../images/UMBC.png');
+	background-repeat:no-repeat;
+	background-size:300px 57px;
+	display:block;
+	height: 57px;
+	width: 300px
+	}
+	
+	#umbc-footer-logo a span
+	{position:absolute;
+	left:-10000px;
+	top:auto;
+	width:1px;
+	height:1px;
+	overflow:hidden
+	}
+	#umbc-footer-logo a{display:inline-block}
+	
