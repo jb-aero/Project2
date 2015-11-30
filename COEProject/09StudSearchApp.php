@@ -15,6 +15,12 @@ $COMMON = new Common($debug);
     <div id="login">
       <div id="form">
         <div class="top">
+        	<form action="StudentFindNextApp.php" method="post" name="complete">
+	    <div class="returnButton">
+			<input type="submit" name="return" class="button large go" value="Find Next Appointment">
+	    </div>
+	    	</form>
+	    	<br><h1>or</h1><br>
 		<h1>Search for Appointments</h1>
 	    <div class="field">
 		<form action="11StudSearchResult.php" method="post" name="SearchApp">
