@@ -19,6 +19,7 @@ $major = $student->getMajor();
  </head>
  <body>
  	<div id="login">
+ 		<h1>Next Available Appointment:</h1><br>
 <?php
 //gets rows in Proj2Appoitments after the current time and date with an enrollednumber less than the max value it can be and containing the student's major
 $sql = "select * from `Proj2Appointments` where `Time` > '".date('Y-m-d H:i:s')."'and `EnrolledNum` < `Max` and (`Major` like '%$major%' OR `Major`='') order by `Time` ASC Limit 2";
