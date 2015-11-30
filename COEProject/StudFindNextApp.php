@@ -82,7 +82,7 @@ function fullMajor($majors)
 	$r ="";
 	foreach ($majorArr as $m)
 	{
-		$r .= AbbToName($m) . "\n";
+		$r .= AbbToName($m) . "<br>";
 	}
 	return $r;
 }
