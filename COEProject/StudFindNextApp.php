@@ -78,15 +78,11 @@ function getAdvisorName($row)
 }
 function fullMajor($majors)
 {
-	if(sizeof($majors) == 0)
-	{
-		return '';
-	}
 	$majorArr = explode(" ", $majors);
 	$r ="";
 	foreach ($majorArr as $m)
 	{
-		$r+= AbbToName($m) + " ";
+		$r .= AbbToName($m) + " ";
 	}
 	return $r;
 }
