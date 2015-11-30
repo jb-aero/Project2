@@ -54,7 +54,7 @@ if(empty($row))
 else
   {
   echo("<table border='1'><th colspan='3'>Appointments Available</th>\n");
-  echo("<tr><td width='60px'>Time:</td><td>Advisor</td><td>Major</td></tr>\n");
+  echo("<tr><td width='100%'>Time:</td><td>Advisor</td><td>Major</td></tr>\n");
   echo($found."\n");
   echo("</table>");
   }
