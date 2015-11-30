@@ -18,6 +18,7 @@ $major = $student->getMajor();
 <link rel='stylesheet' type='text/css' href='../css/standard.css'/>
  </head>
  <body>
+ 	<div class='login'>
 <?php
 //gets rows in Proj2Appoitments after the current time and date with an enrollednumber less than the max value it can be and containing the student's major
 $sql = "select * from `Proj2Appointments` where `Time` > '".date('Y-m-d H:i:s')."'and `EnrolledNum` < `Max` and (`Major` like '%$major%' OR `Major`='') order by `Time` ASC Limit 2";
@@ -60,6 +61,7 @@ else
 <form action="02StudHome.php" method="link">
       <div class="nextButton">
   <input type="submit" name="done" class="button large go" value="Done">
+  </div>
   </div>
   </form>
  </body>
