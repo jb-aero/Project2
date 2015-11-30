@@ -5,7 +5,6 @@ include('../CommonMethods.php');
 include('../Student.php');
 include('../Appointment.php');
 include('../Advisor.php');
-include('Conversion.php');
 $COMMON = new Common($debug);
 
 // Get student information from database
