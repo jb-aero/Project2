@@ -92,7 +92,7 @@ $COMMON = new Common($debug);
 	    </form>
 	    	<form action="09StudSearchApp.php" method="link">
 	    	<div class="nextButton">
-	    		<input type="submit" name="return" calss="button large go" value="New Search">
+	    		<input type="submit" name="return" class="button large go" value="New Search">
 	    	</div>
 		</form>
 		</div>
