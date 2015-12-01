@@ -89,6 +89,11 @@ $COMMON = new Common($debug);
 	    <div class="nextButton">
 			<input type="submit" name="done" class="button large go" value="Done">
 	    </div>
+	    </form>
+	    	<form action="09StudSearchApp.php" method="link">
+	    	<div class="nextButton">
+	    		<input type="submit" name="return" calss="button large go" value="New Search">
+	    	</div>
 		</form>
 		</div>
 		<div class="bottom">
