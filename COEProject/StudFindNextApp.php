@@ -43,8 +43,8 @@ if ($row)
     //places the appointment information into a table
     $found = "<tr><td>". date('l, F d, Y g:i A', strtotime($row[1]))."</td>".
       "<td>". $advName."</td>". 
-      "<td>". fullMajor($row[3]). "</td>.
-      "<td>". $row[7]</tr>";
+      "<td>". fullMajor($row[3]). "</td>".
+      "<td>". $row[7]. "</td></tr>";
   }
 //if no appointemnt was found
 if(empty($row))
