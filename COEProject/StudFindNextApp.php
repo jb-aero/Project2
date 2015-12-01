@@ -43,7 +43,8 @@ if ($row)
     //places the appointment information into a table
     $found = "<tr><td>". date('l, F d, Y g:i A', strtotime($row[1]))."</td>".
       "<td>". $advName."</td>". 
-      "<td>". fullMajor($row[3]). "</td></tr>";
+      "<td>". fullMajor($row[3]). "</td>.
+      "<td>". $row[7]</tr>";
   }
 //if no appointemnt was found
 if(empty($row))
@@ -54,7 +55,7 @@ if(empty($row))
 else
   {
   echo("<table border='1' align='center'><th colspan='3'>Appointments Available</th>\n");
-  echo("<tr><td width='50%'>Time:</td><td>Advisor</td><td>Major</td></tr>\n");
+  echo("<tr><td width='50%'>Time:</td><td>Advisor</td><td>Major</td><td>Location</td></tr>\n");
   echo($found."\n");
   echo("</table>");
   }
