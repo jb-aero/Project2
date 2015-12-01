@@ -54,7 +54,7 @@ if(empty($row))
 //else print out the found important information
 else
   {
-  echo("<table border='1' align='center'><th colspan='3'>Appointments Available</th>\n");
+  echo("<table border='1' align='center'><th colspan='4'>Appointments Available</th>\n");
   echo("<tr><td width='50%'>Time:</td><td>Advisor</td><td>Major</td><td>Location</td></tr>\n");
   echo($found."\n");
   echo("</table>");
