@@ -1,6 +1,6 @@
 <?php
 require_once 'CommonMethods.php';
-include_once 'COEProject/Conversion.php';
+include_once 'Conversion.php';
 class Base {
 	// All these are meant to be PRIVATE!! DON'T MESS WITH THEM!
 	var $COMMON = null; // Don't create COMMON until necessary

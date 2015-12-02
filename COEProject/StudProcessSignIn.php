@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("Conversion.php");
+include("../Conversion.php");
 include("../CommonMethods.php");
 include("../Student.php");
 $debug = false;
