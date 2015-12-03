@@ -19,7 +19,7 @@ class Appointment extends Base {
 	}
 	
 	function getEnrolledID() {
-		return $this->getInfo('EnrolledID');
+		return trim($this->getInfo('EnrolledID'));
 	}
 	
 	function getEnrolledNum() {

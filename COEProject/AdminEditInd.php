@@ -25,65 +25,34 @@ session_start();
           <?php
             $debug = false;
             include('../CommonMethods.php');
+			include('../Appointment.php');
+			include('../Advisor.php');
+			include('../Student.php');
             $COMMON = new Common($debug);
 
-            $sql = "SELECT * FROM `Proj2Appointments` WHERE `AdvisorID` != '0' and `Time` > '".date('Y-m-d H:i:s')."' ORDER BY `Time`";
-            $rs = $COMMON->executeQuery($sql, "Advising Appointments");
-            $row = mysql_fetch_array($rs, MYSQL_NUM); 
-			//first item in row
-            if($row){
+			// Get all individual appointments
+			$appointments = Appointment::searchAppointments($COMMON, 'I', null, null, null, true, -1, '');
+			// Check if there are appointments
+            if(count($appointments) > 0){
               echo("<form action=\"AdminConfirmEditInd.php\" method=\"post\" name=\"Confirm\">");
               
 
-	echo("<table border='1px'>\n<tr>");
-	echo("<tr><td width='320px'>Time</td><td>Majors</td><td>Enrolled</td></tr>\n");
-
-              $secsql = "SELECT `FirstName`, `LastName` FROM `Proj2Advisors` WHERE `id` = '$row[2]'";
-              $secrs = $COMMON->executeQuery($secsql, "Advising Appointments");
-              $secrow = mysql_fetch_row($secrs);
-
-              if($row[4]){
-                $trdsql = "SELECT `FirstName`, `LastName` FROM `Proj2Students` WHERE `StudentID` = '$row[4]'";
-                $trdrs = $COMMON->executeQuery($trdsql, "Advising Appointments");
-                $trdrow = mysql_fetch_row($trdrs);
-              }
-
-              echo("<tr><td><label for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"IndApp\" 
-                required value=\"row[]=$row[1]&row[]=$secrow[0]&row[]=$secrow[1]&row[]=$row[3]&row[]=$row[4]\">");
-              echo(date('l, F d, Y g:i A', strtotime($row[1])). "</label></td>");
-              if($row[3]){
-                echo("<td>$row[3]</td>"); 
-              }
-              else{
-                echo("Available to all majors"); 
-              }
+			  echo("<table border='1px'>\n<tr>");
+			  echo("<tr><td width='320px'>Time</td><td>Majors</td><td>Enrolled</td></tr>\n");
               
-              if($row[4]){
-                echo("<td>$trdrow[0] $trdrow[1]</td>");
-              }
-              else{
-                echo("<td>Empty</td>");
-              }
-			  echo("</tr>\n");
+			  // Display all items
+              foreach ($appointments as $appt) {
+                $advisorname = getAdvisorName($appt->getAdvisorID());
 
-              
-			  //rest of items in row
-              while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
-                $secsql = "SELECT `FirstName`, `LastName` FROM `Proj2Advisors` WHERE `id` = '$row[2]'";
-                $secrs = $COMMON->executeQuery($secsql, "Advising Appointments");
-                $secrow = mysql_fetch_row($secrs);
-
-                if($row[4]){
-                  $trdsql = "SELECT `FirstName`, `LastName` FROM `Proj2Students` WHERE `StudentID` = '$row[4]'";
-                  $trdrs = $COMMON->executeQuery($trdsql, "Advising Appointments");
-                  $trdrow = mysql_fetch_row($trdrs);
+                if($appt->getEnrolledID()){
+                  $student = new Student($COMMON, trim($appt->getEnrolledID()));
                 }
 
-                echo("<tr><td><label for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"IndApp\" 
-                  required value=\"row[]=$row[1]&row[]=$secrow[0]&row[]=$secrow[1]&row[]=$row[3]&row[]=$row[4]\">");
-                echo(date('l, F d, Y g:i A', strtotime($row[1])). "</label></td>");
-                if($row[3]){
-                  echo("<td>$row[3]</td>"); 
+                echo("<tr><td><label for='".$appt->getID()."'><input type=\"radio\" id='".$appt->getID()."' name=\"IndApp\" 
+                  required value=\"".$appt->getID()."\">");
+                echo(date('l, F d, Y g:i A', strtotime($appt->getTime())). "</label></td>");
+                if($appt->getMajor()){
+                  echo("<td>".$appt->convertMajor()."</td>"); 
                 }
                 else{
                   echo("Available to all majors"); 
@@ -91,8 +60,8 @@ session_start();
 
                 
 
-                if($row[4]){
-                  echo("<td>$trdrow[0] $trdrow[1]</td>");
+                if($appt->getEnrolledId()){
+                  echo("<td>".$student->getFirstName()." ".$student->getLastName()."</td>");
                 }
                 else{
                   echo("<td>Empty</td>");
@@ -113,7 +82,7 @@ session_start();
               echo("</form>");
             }
             else{
-              echo("<br><b>There are currently no individual appointments scheduled at the current moment.</b>");
+              echo("<br><b>There are currently no individual appointments scheduled.</b>");
               echo("<br><br>");
 			  echo("</td</tr>");
               echo("<form method=\"link\" action=\"AdminUI.php\">");
@@ -134,3 +103,23 @@ session_start();
   </body>
   
 </html>
+
+<?php
+// just getting the advisor's name - use a cache
+function getAdvisorName($id)
+{
+	global $debug; global $COMMON;
+	static $cache = array();
+	if ($id == 0) {
+		// Group advising
+		return 'Group';
+	}
+	// Check if it's in the cache
+	else if (!isset($cache[$id])) {
+		// Not in cache, so fetch from database and store in cache
+		$cache[$id] = new Advisor($COMMON, $id);
+	}
+	// Return advisor's name from cache
+	return $cache[$id]->convertFullName();
+}
+?>
