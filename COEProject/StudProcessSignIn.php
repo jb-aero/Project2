@@ -10,7 +10,7 @@ $COMMON = new Common($debug);
 $student = new Student($COMMON, strtoupper($_POST["studID"]));
 if (!$student->exists()) {
 	// Student does not exist, so create in database
-	Student::createStudent($COMMON, $_POST["firstN"], $_POST["lastN"], $_POST["studID"], $_POST["email"], NameToAbb($_POST["major"]));
+	Student::createStudent($COMMON, strtoupper($_POST["firstN"]), strtoupper($_POST["lastN"]), strtoupper($_POST["studID"]), $_POST["email"], NameToAbb($_POST["major"]));
 }
 
 // Save student ID for session
