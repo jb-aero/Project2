@@ -129,6 +129,16 @@ html{
         background-color: #669d97;
         color: #FFF;
       }
+      
+      .button.logout {
+      	background-color: #cc0000;
+      	color: #FFF;
+      }
+      
+      .button.logout:hover {
+      	background-color: #ff6666;
+      	color: #FFF;
+      }
        
       .field{ 
       margin: 8px 0; 
