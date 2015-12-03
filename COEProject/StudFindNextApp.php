@@ -64,8 +64,8 @@ else
 <?php  if (!empty($row)): ?>
 <form action="10StudConfirmSch.php" method="post" name="Select Time">
 <?php
-	$advisor=$row[2];
-	$appTime=$row[1];
+	echo("<input type='hidden' name='advisor' value='$row[2]'>");
+	echo("<input type='hidden' name='appTime' value='$row[1]'>");
 ?>
 <div class="nextButton">
 	<input type="submit" name="next" class="button large go" value="Select This Appointment">
