@@ -65,7 +65,7 @@ else
 <form action="10StudConfirmSch.php" method="post" name="Select Time">
 <?php
 	$advisor=$row[2];
-	$apptime=$row[1];
+	$appTime=$row[1];
 ?>
 <div class="nextButton">
 	<input type="submit" name="next" class="button large go" value="Select This Appointment">
