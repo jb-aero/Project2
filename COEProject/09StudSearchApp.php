@@ -67,8 +67,12 @@ $COMMON = new Common($debug);
 	    <div class="returnButton">
 			<input type="submit" name="return" class="button large go" value="Return to Home">
 	    </div>
-		</div>
 		</form>
+		<?php
+		  include('../Footer.html')
+	    ?>
+      </div>
+    </div>
 
   </body>
 </html>

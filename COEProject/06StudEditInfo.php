@@ -91,8 +91,13 @@ $student = new Student($COMMON, $_SESSION["studID"]);
 			<div class="nextButton">
 				<input type="submit" name="save" class="button large go" value="Save">
 			</div>
-			</div>
 		</form>
+		</div>
+		<?php
+		  include('../Footer.html')
+	    ?>
+      </div>
+    </div>
 	</body>
 	
 </html>

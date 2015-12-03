@@ -53,11 +53,11 @@ $student = new Student($COMMON, $_SESSION["studID"]);
 		?>
 		</form>
         </div>
-		<form action="Logout.php" method="post" name="Logout">
-	    <div class="logoutButton">
-			<input type="submit" name="logout" class="button large go" value="Logout">
-	    </div>
 		</div>
-		</form>
+		<?php
+		  include('../Footer.html')
+	    ?>
+      </div>
+    </div>
   </body>
 </html>

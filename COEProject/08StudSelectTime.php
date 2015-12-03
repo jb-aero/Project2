@@ -84,5 +84,11 @@ if ($localAdvisor != 0) {
 		<p>Note: Appointments are maximum 30 minutes long.</p>
 		<p style="color:red">If there are no more open appointments, contact your advisor or click <a href='02StudHome.php'>here</a> to start over.</p>
 		</div>
+		</div>
+		<?php
+		  include('../Footer.html')
+	    ?>
+      </div>
+    </div>
   </body>
 </html>

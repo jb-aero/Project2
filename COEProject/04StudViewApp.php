@@ -23,7 +23,7 @@ $studID = $_SESSION["studID"];
 	    <div class="field">
 	    <?php
 			// Search for appointment with this student
-			$appointments = Appointment::searchAppointments($COMMON, null, null, null, null, false, null, '', $studID);
+			$appointments = Appointment::searchAppointments($COMMON, null, null, null, null, null, null, '', $studID);
 			// if for some reason there really isn't a match, (something got messed up, tell them there really isn't one there)
 			$num_rows = count($appointments);
 
@@ -67,7 +67,12 @@ $studID = $_SESSION["studID"];
 	    <div class="finishButton">
 			<button onclick="location.href = '02StudHome.php'" class="button large go" >Return to Home</button>
 	    </div>
-		</div>
 		</form>
+		</div>
+		<?php
+		  include('../Footer.html')
+	    ?>
+      </div>
+    </div>
   </body>
 </html>

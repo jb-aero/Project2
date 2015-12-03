@@ -107,5 +107,10 @@ session_start();
 	    </div>
 		</form>
 		</div>
+		<?php
+		  include('../Footer.html')
+	    ?>
+      </div>
+    </div>
   </body>
 </html>
