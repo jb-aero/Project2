@@ -60,6 +60,18 @@ else
   echo("</table>");
   }
 ?>
+
+<?php  if (!empty($row)): ?>
+<form action="10StudConfirmSch.php" method="post" name="Select Time">
+<?php
+	$advisor=$row[2];
+	$apptime=$row[1];
+?>
+<div class="nextButton">
+	<input type="submit" name="next" class="button large go" value="Select This Appointment">
+</div>
+</form>
+<?php endif; ?>
 <form action="02StudHome.php" method="link">
       <div class="nextButton">
   <input type="submit" name="done" class="button large go" value="Done">
