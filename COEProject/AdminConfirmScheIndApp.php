@@ -2,6 +2,7 @@
 session_start();
 $debug = false;
 include('../CommonMethods.php');
+include('../Appointment.php');
 $COMMON = new Common($debug);
 ?>
 
@@ -80,27 +81,18 @@ $COMMON = new Common($debug);
 			}
 			
 			//get advisor id
-			$User = $_SESSION["UserN"];
-			$Pass = $_SESSION["PassW"];
-			$sql = "select `id` from `Proj2Advisors` where `Username` = '$User' and `Password` = '$Pass'";
-			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-			$row = mysql_fetch_row($rs);
-			$id = $row[0];
+			$id = $_SESSION['UserID'];
 			
 			//make sure app doesn't exist
 			//insert new app to DB
 			//print app
 			foreach($datetimes as $dt){
-				$sql = "SELECT * from `Proj2Appointments` where `Time` = '$dt' and `AdvisorID` = '$id'";
-				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-				$row = mysql_fetch_row($rs);
+				// Attempt to create appointment
+				$created = Appointment::createAppointment($COMMON, $dt, $id, $majorDB, 1);
 				echo date('l, F d, Y g:i A', strtotime($dt)), " <br> Majors: ", $majorPrint;
-				if($row){
+				if(!$created){
+					// Appointment already exists
 					echo "<br><span style='color:red'>!!</span>";
-				}
-				else{
-					$sql = "insert into Proj2Appointments (`Time`, `AdvisorID`, `Major`, `Max`) values ('$dt', '$id', '$majorDB',1)";
-					$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 				}
 				echo "<br><br>";
 			}

@@ -63,6 +63,7 @@ class Appointment extends Base {
 			// Create new appointment
 			parent::doQuery("INSERT INTO `Proj2Appointment` (`Time`, `AdvisorID`, `Major`, `Max`)
 			VALUES ('$time', '$advisorID', '$major', '$max'", $common);
+			return true;
 		}
 	}
 	
