@@ -23,7 +23,7 @@ $studID = $_SESSION["studID"];
 	    <div class="field">
 	    <?php
 			// Search for appointment with this student
-			$appointments = Appointment::searchAppointments($COMMON, null, null, null, null, null, null, '', $studID);
+			$appointments = Appointment::searchAppointments($COMMON, null, null, null, null, false, null, '', $studID);
 			// if for some reason there really isn't a match, (something got messed up, tell them there really isn't one there)
 			$num_rows = count($appointments);
 
