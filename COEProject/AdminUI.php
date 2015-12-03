@@ -46,15 +46,13 @@ $COMMON = new Common($debug);
 	
 	</form>
 	<br>
-
-	<form method="link" action="Logout.php">
-		<input type="submit" name="next" class="button large go" value="Log Out">
-	</form>
-          
-        </div>
-        <div class="field">
-          
-        </div>
+        
+		</div>
+		<?php
+		  include('../Footer.html')
+	    ?>
+      </div>
+    </div>
 	</div>
 
 	<?php include('./workOrder/workButton.php'); ?>

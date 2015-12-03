@@ -153,6 +153,11 @@ html{
       .actions{ 
       text-align: right; 
       }
+	  
+	  .logoutButton {
+		  margin-right: 0px;
+		  position: absolute;
+	  }
 
       .bottom{ 
       border-top: 0px solid #ddd; 

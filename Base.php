@@ -11,7 +11,7 @@ class Base {
 	// Pull outs the record in the database with the given value ($id)
 	// in the column specified by $field, from the table specified by $table
 	// Can pass array to $id to create from already queried row
-	function Base($common, $id, $table, $field='id') {
+	function Base($common, $id, $table, $field='id', $field2='password', $pass=null) {
 		$this->COMMON = $common;
 		if (is_array($id)) {
 			// Given info array from some other query
@@ -20,8 +20,14 @@ class Base {
 			return;
 		}
 
+		if ($pass == null) {
+			$rs = $this->COMMON->executeQuery("SELECT * FROM `$table` WHERE `$field`='$id'", $_SEVER["PHP_SELF"]);
+		} else {
+			$rs = $this->COMMON->executeQuery("SELECT * FROM `$table` WHERE `$field`='$id' AND `$field2`='$pass'", $_SEVER["PHP_SELF"]);
+		}
+		
+		
 		// Query database for record from table with id
-		$rs = $this->COMMON->executeQuery("SELECT * FROM `$table` WHERE `$field`='$id'", $_SEVER["PHP_SELF"]);
 		if ($rs && mysql_num_rows($rs) > 0) {
 			// Successful query - set info and cache
 			$this->info = mysql_fetch_assoc($rs);

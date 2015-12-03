@@ -1,9 +1,19 @@
 <?php
 require_once 'Base.php';
 class Advisor extends Base {
-	function Advisor($common, $id) {
+	function Advisor($common, $id, $pass=null) {
 		// Get record from Proj2Advisors table with the given id
-		parent::Base($common, $id, 'Proj2Advisors');
+		if ($pass == null)
+		{
+			// Already signed in
+			parent::Base($common, $id, 'Proj2Advisors', 'Username');
+		}
+		else
+		{
+			// sign in screen
+			parent::Base($common, $id, 'Proj2Advisors', 'Username', 'Password', $pass);
+		}
+		
 	}
 		
 	/* Raw table data functions */
