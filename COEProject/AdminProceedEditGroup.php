@@ -24,23 +24,29 @@ session_start();
           <?php
             $debug = false;
             include('../CommonMethods.php');
+			include('../Appointment.php');
             $COMMON = new Common($debug);
 
-            $group = $_SESSION["GroupApp"];
-            parse_str($group);
+            $appID = $_GET["app"];
+			// Get appointment info from database
+            $appt = new Appointment($COMMON, $appID);
 
             echo("<form action=\"AdminConfirmEditGroup.php\" method=\"post\" name=\"Edit\">");
-            echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>");
+			// Hidden field to mark it is not deletion
+			echo("<input type=\"hidden\" name=\"edit\" value=\"edit\">");
+			// Hidden field for appointment ID
+			echo("<input type=\"hidden\" name=\"GroupApp\" value=\"".$appt->getID()."\">");
+            echo("Time: ". date('l, F d, Y g:i A', strtotime($appt->getTime())). "<br>");
             echo("Majors included: ");
-            if($row[1]){
-              echo("$row[1]<br>"); 
+            if($appt->getMajor()){
+              echo($appt->convertMajor(', ')."<br>"); 
             }
             else{
               echo("Available to all majors<br>"); 
             }
-            echo("Number of students enrolled: $row[2] <br>");
+            echo("Number of students enrolled: ".$appt->getEnrolledNum()." <br>");
             echo("Student limit: ");
-            echo("<input type=\"number\" id=\"stepper\" name=\"stepper\" min=\"$row[2]\" max=\"$row[3]\" value=\"$row[3]\" />");
+            echo("<input type=\"number\" id=\"stepper\" name=\"stepper\" min=\"".$appt->getEnrolledNum()."\" max=\"".$appt->getMax()."\" value=\"".$appt->getMax()."\" />");
 
             echo("<br><br>");
 
@@ -49,8 +55,8 @@ session_start();
             echo("</div>");
             echo("</div>");
             echo("<div class=\"bottom\">");
-            if($row[2] > 0){
-              echo "<p style='color:red'>Note: There are currently $row[2] students enrolled in this appointment. <br>
+            if($appt->getEnrolledNum() > 0){
+              echo "<p style='color:red'>Note: There are currently ".$appt->getNumEnrolled()." students enrolled in this appointment. <br>
                     The student limit cannot be changed to be under this amount.</p>";
             }
             echo("</div>");

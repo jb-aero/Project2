@@ -23,67 +23,65 @@ $debug = false;
         <div class="top">
 		<div class="field">
         <?php
-          $delete = $_SESSION["Delete"];
-          $group = $_SESSION["GroupApp"];
-          parse_str($group);
+		  // Deletion only if edit hidden field is not set
+          $delete = !isset($_POST["edit"]);
+		  // Get appointment ID from post or get
+		  if (isset($_POST["GroupApp"])) {
+		  	$appID = $_POST["GroupApp"];
+		  } else {
+		  	$appID = $_GET["app"];
+		  }
  
           include('../CommonMethods.php');
+		  include('../Appointment.php');
+		  include('../Student.php');
           $COMMON = new Common($debug);
 
+		  // Get appointment info
+		  $appt = new Appointment($COMMON, $appID);
           if($delete == true){
             echo("<h1>Removed Appointment</h1><br>");
 
-            $sql = "SELECT `EnrolledID` FROM `Proj2Appointments` WHERE `Time` = '$row[0]'
-              AND `AdvisorID` = '0' 
-              AND `Major` = '$row[1]' 
-              AND `EnrolledNum` = '$row[2]'
-              AND `Max` = '$row[3]'";
-            $rs = $COMMON->executeQuery($sql, "Advising Appointments");
-
-            $stds = mysql_fetch_row($rs);
-	echo($stds[0]);
-	    $stds = trim($stds[0]); // had some side white spaces sometimes
-	    $stds = split(" ", $stds);
+            $stds = $appt->getEnrolledID();
+			echo($stds);
+	   		$stds = trim($stds); // had some side white spaces sometimes
+	   		$stds = split(" ", $stds);
 
             if($debug) { var_dump("\n<BR>EMAILS ARE: $stds \n<BR>"); }
 		// foreach($stds as $element) { echo("->".$element."\n"); }
 
-            if($stds)
-	    {
+            if($stds[0])
+	    	{
 
 
               foreach($stds as $element){
                 $element = trim($element);
-		$sql = "UPDATE `Proj2Students` SET `Status`='C' WHERE `StudentID` = '$element'";
+				$sql = "UPDATE `Proj2Students` SET `Status`='C' WHERE `StudentID` = '$element'";
                 $rs = $COMMON->executeQuery($sql, "Advising Appointments");
-                $sql = "SELECT `Email` FROM `Proj2Students` WHERE `StudentID` = '$element'";
-                $rs = $COMMON->executeQuery($sql, "Advising Appointments");
-                $ros = mysql_fetch_row($rs);
-                $eml = $ros[0];
+				// Get student info from database
+				$student = new Student($COMMON, $element);
+
+                $eml = $student->getEmail();
                 $message = "The following group appointment has been deleted by the adminstration of your advisor: " . "\r\n" .
-                "Time: $row[0]" . "\r\n" . 
+                "Time: ". $appt->getTime() . "\r\n" . 
                 "To schedule for a new appointment, please log back into the UMBC COEIT Engineering and Computer Science Advising webpage." . "\r\n" .
-		"http://coeadvising.umbc.edu  -> COEIT Advising Scheduling \r\n Reminder, this is only accessible on campus."; 
+				"http://coeadvising.umbc.edu  -> COEIT Advising Scheduling \r\n Reminder, this is only accessible on campus."; 
 
                 mail($eml, "Your COE Advising Appointment Has Been Deleted", $message);
               }
             }
 
-            $sql = "DELETE FROM `Proj2Appointments` WHERE `Time` = '$row[0]' 
-              AND `AdvisorID` = '0' 
-              AND `Major` = '$row[1]' 
-              AND `EnrolledNum` = '$row[2]'
-              AND `Max` = '$row[3]'";
+            $sql = "DELETE FROM `Proj2Appointments` WHERE `id`='$appID'";
             $rs = $COMMON->executeQuery($sql, "Advising Appointments");
 
-            echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>");
+            echo("Time: ". date('l, F d, Y g:i A', strtotime($appt->getTime())). "<br>");
             echo("Majors included: ");
 
-            if($row[1]){ echo("$row[1]<br>"); }
+            if($appt->getMajor()){ echo($appt->convertMajor(', ')."<br>"); }
             else{ echo("Available to all majors<br>"); }
 
-            echo("Number of students enrolled: $row[2]<br>");
-            echo("Student limit: $row[3]");
+            echo("Number of students enrolled: ".$appt->getEnrolledNum()."<br>");
+            echo("Student limit: ".$appt->getMax());
             echo("<br><br>");
             echo("<form method=\"link\" action=\"AdminUI.php\">");
             echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Return to Home\">");
@@ -97,32 +95,30 @@ $debug = false;
           else{
             echo("<h1>Changed Appointment</h1><br>");
 			echo("<h2>Previous Appointment:</h2>");
-            echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>");
+            echo("Time: ". date('l, F d, Y g:i A', strtotime($appt->getTime())). "<br>");
             echo("Majors included: ");
-            if($row[1]){
-              echo("$row[1]<br>"); 
+            if($appt->getMajor()){
+              echo($appt->convertMajor(', ')."<br>"); 
             }
             else{
               echo("Available to all majors<br>"); 
             }
-            echo("Number of students enrolled: $row[2]<br>");
-            echo("Student limit: $row[3]");
+            echo("Number of students enrolled: ".$appt->getEnrolledNum()."<br>");
+            echo("Student limit: ".$appt->getMax());
             echo("<h2>Updated Appointment:</h2>");
             $limit = $_POST["stepper"];
-            echo("<b>Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "</b><br>");
+            echo("<b>Time: ". date('l, F d, Y g:i A', strtotime($appt->getTime())). "</b><br>");
             echo("<b>Majors included: ");
-            if($row[1]){
-              echo("$row[1]</b><br>"); 
+            if($appt->getMajor()){
+              echo($appt->convertMajor(', ')."</b><br>"); 
             }
             else{
               echo("Available to all majors</b><br>"); 
             }
-            echo("<b>Number of students enrolled: $row[2] </b><br>");
+            echo("<b>Number of students enrolled: ".$appt->getEnrolledNum()." </b><br>");
             echo("<b>Student limit: $limit</b>");
 
-            $sql = "UPDATE `Proj2Appointments` SET `Max`='$limit' WHERE `Time` = '$row[0]' 
-                    AND `AdvisorID` = '$0' AND `Major` = '$row[1]' 
-                    AND `EnrolledNum` = '$row[2]' AND `Max` = '$row[3]'";
+            $sql = "UPDATE `Proj2Appointments` SET `Max`='$limit' WHERE `id`='$appID'";
             $rs = $COMMON->executeQuery($sql, "Advising Appointments"); 
 
             echo("<br><br>");

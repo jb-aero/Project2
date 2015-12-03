@@ -41,6 +41,8 @@ class Appointment extends Base {
 	function convertMajor($separator=' ') {
 		// Separate the major acronym string into an array of acronyms
 		$majors = explode(' ', $this->getMajor());
+		// Remove empty entries
+		$majors = array_filter($majors);
 		// Change all acronyms to major names
 		for ($i = 0; $i < count($majors); $i++) {
 			$majors[$i] = AbbToName($majors[$i]);

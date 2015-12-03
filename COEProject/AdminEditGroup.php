@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION["Delete"] = false;
 ?>
 
 <!DOCTYPE html>
@@ -26,50 +25,36 @@ $_SESSION["Delete"] = false;
           <?php
             $debug = false;
             include('../CommonMethods.php');
+			include('../Appointment.php');
             $COMMON = new Common($debug);
 
-            $sql = "SELECT * FROM `Proj2Appointments` WHERE `AdvisorID` = '0' ORDER BY `Time`";
-            $rs = $COMMON->executeQuery($sql, "Advising Appointments");
-            $row = mysql_fetch_array($rs, MYSQL_NUM); 
+			// Get all group appointments from database
+			$appointments = Appointment::searchAppointments($COMMON, 0, null, null, null, false, -1, '');
 			//first item in row
-            if($row){
+            if(count($appointments) > 0){
               echo("<form action=\"AdminProcessEditGroup.php\" method=\"post\" name=\"Confirm\">");
-	echo("<table border='1px'>\n<tr>");
-	echo("<tr><td width='320px'>Time</td><td>Majors</td><td>Seats Enrolled</td><td>Total Seats</td></tr>\n");
+			  echo("<table border='1px'>\n<tr>");
+			  echo("<tr><td width='320px'>Time</td><td>Majors</td><td>Seats Enrolled</td><td>Total Seats</td></tr>\n");
 
-              echo("<td><label for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"GroupApp\" 
-                required value=\"row[]=$row[1]&row[]=$row[3]&row[]=$row[5]&row[]=$row[6]\">");
-              echo(date('l, F d, Y g:i A', strtotime($row[1])). "</label></td>");
-              if($row[3]){
-                echo("<td>".$row[3]."</td>"); 
-              }
-              else{
-                echo("<td>Available to all majors</td>"); 
-              }
-
-              echo("<td>$row[5]</td><td>$row[6]");
-			  echo("</label>");
-			
-			//rest of row
-              echo("</td></tr>\n");
-              while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
-                echo("<tr><td><label for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"GroupApp\" 
-                  required value=\"row[]=$row[1]&row[]=$row[3]&row[]=$row[5]&row[]=$row[6]\">");
-                echo(date('l, F d, Y g:i A', strtotime($row[1])). "</label></td>");
-                if($row[3]){
-                  echo("<td>".$row[3]."</td>"); 
+			  // Display each appointment
+              foreach ($appointments as $appt) {
+                echo("<tr><td><label for='".$appt->getID()."'><input type=\"radio\" id='".$appt->getID()."' name=\"GroupApp\" 
+                  required value=\"".$appt->getID()."\">");
+                echo(date('l, F d, Y g:i A', strtotime($appt->getTime())). "</label></td>");
+                if($appt->getMajor()){
+                  echo("<td>".$appt->convertMajor()."</td>"); 
                 }
                 else{
                   echo("<td>Available to all majors</td>"); 
                 }
 
-                echo("<td>$row[5]</td><td>$row[6]");
+                echo("<td>".$appt->getEnrolledNum()."</td><td>".$appt->getMax());
 				echo("</label>");
                 echo("</td></tr>");
                 
               }
 
-		echo("</table>");
+			  echo("</table>");
 
               echo("<div class=\"nextButton\">");
               echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Delete Appointment\">");
@@ -81,7 +66,7 @@ $_SESSION["Delete"] = false;
               echo("</form>");
             }
             else{
-              echo("<br><b>There are currently no group appointments scheduled at the current moment.</b>");
+              echo("<br><b>There are currently no group appointments scheduled.</b>");
               echo("<br><br>");
               echo("<form method=\"link\" action=\"AdminUI.php\">");
               echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Return to Home\">");
