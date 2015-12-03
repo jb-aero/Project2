@@ -15,19 +15,19 @@ session_start();
 	    <div class="statusMessage">
 	    <?php		
 			if($_GET["stat"] == "co"){
-				echo "You have completed your sign-up for an advising appointment.";
+				echo("<h2>You have completed your sign-up for an advising appointment.</h2>");
 			}
 			elseif($_GET["stat"] == "n"){
-				echo "You did not sign up for an advising appointment.";
+				echo ("<h2>You did not sign up for an advising appointment.</h2>");
 			}
 			if($_GET["stat"] == "ca"){
-				echo "You have cancelled your advising appointment.";
+				echo ("<h2>You have cancelled your advising appointment.</h2>");
 			}
 			if($_GET["stat"] == "r"){
-				echo "You have changed your advising appointment.";
+				echo ("<h2>You have changed your advising appointment.</h2>");
 			}
 			if($_GET["stat"] == "k"){
-				echo "No changes have been made to your advising appointment.";
+				echo ("<h2>No changes have been made to your advising appointment.</h2>");
 			}
 		?>
         </div>
