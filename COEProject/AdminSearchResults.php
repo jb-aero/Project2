@@ -88,7 +88,7 @@ $COMMON = new Common($debug);
 							"<br>Advisor: ". $advName. 
 							"<br>Major: ". $appointment->convertMajor(). 
 							"<br>Enrolled Students: ". $appointment->getEnrolledID(). 
-							"<br>Number of enrolled student(s): ". $appointment->getEnrolled(). 
+							"<br>Number of enrolled student(s): ". $appointment->getEnrolledNum(). 
 							"<br>Maximum number of students allowed: ". $appointment->getMax(). "<br><br>";
 					array_push($results, $found);
 				}
