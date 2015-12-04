@@ -22,29 +22,35 @@
 		
 
 		<?php
-			$first = $_SESSION["AdvF"];
-			$last = $_SESSION["AdvL"];
-			$user = $_SESSION["AdvUN"];
-			$pass = $_SESSION["AdvPW"];
-			$office = $_SESSION["AdvOff"];
+		
+	$_SESSION["PassCon"] = false;
+	if ($_POST["PassW"] != $_POST["ConfP"]) {
+		$_SESSION["PassCon"] = true;
+		header('Location: AdminCreateNewAdv.php');
+	}
+	elseif ($_POST["PassW"] == $_POST["ConfP"]) {
 
-			include('../CommonMethods.php');
-			$debug = false;
-			$Common = new Common($debug);
+		$first = $_POST["firstN"];
+		$last = $_POST["lastN"];
+		$user = strtoupper($_POST["UserN"]);
+		$pass = md5($_POST["PassW"]);
+		$office = $_POST["Office"];
 
-      $sql = "SELECT * FROM `Proj2Advisors` WHERE `Username` = '$user' AND `FirstName` = '$first' AND  `LastName` = '$last'";
-      $rs = $Common->executeQuery($sql, "Advising Appointments");
-      $row = mysql_fetch_row($rs);
-      if($row){
+		include('../CommonMethods.php');
+		include('../Advisor.php');
+		
+		$debug = false;
+		$Common = new Common($debug);
+		$advisor = new Advisor($Common, $user);
+			
+      if (Advisor::createAdvisor($Common, $first, $last, $user, $pass, $office)) {
+		echo("<h2>New Advisor has been created:</h2>");
+        echo ("<h3>$first $last<h3>");
+      }
+      else {
         echo("<h3>Advisor $first $last already exists</h3>");
       }
-      else{
-  			$sql = "INSERT INTO `Proj2Advisors`(`FirstName`, `LastName`, `Username`, `Password`, `Office`)
-  			VALUES ('$first', '$last', '$user', '$pass', '$office')";
-			echo("<h2>New Advisor has been created:</h2>");
-        echo ("<h3>$first $last<h3>");
-        $rs = $Common->executeQuery($sql, "Advising Appointments");
-      }
+    }
 		?>
 		<form method="link" action="AdminUI.php">
 			<input type="submit" name="next" class="button large go" value="Return to Home">
