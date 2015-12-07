@@ -38,6 +38,10 @@ class Advisor extends Base {
 		return $this->getInfo('Office');
 	}
 	
+	function getMeeting() {
+		return $this->getInfo('Meeting');
+	}
+	
 	/* Conversion functions */
 	function convertFullName() {
 		return $this->getInfo('FirstName') . ' ' . $this->getInfo('LastName');
@@ -46,7 +50,7 @@ class Advisor extends Base {
 	
 	// Creates a new advisor in the database. Returns false if advisor already exists with
 	// the given first name, last name, and user name. Returns true on successful insert.
-	function createAdvisor($common, $firstName, $lastName, $username, $password, $office) {
+	function createAdvisor($common, $firstName, $lastName, $username, $password, $office, $meeting) {
 		// Check if advisor already exists
 		$rs = $this->doQuery("SELECT `id` FROM Proj2Advisors WHERE `FirstName`='$firstName' AND
 		`LastName`='$lastName' AND `Username`='$username'", $common);
@@ -55,8 +59,8 @@ class Advisor extends Base {
 			return false;
 		} else {
 			// Advisor does not exist, so create it
-			$this->doQuery("INSERT INTO Proj2Advisors (`FirstName`, `LastName`, `Username`, `Password`, `Office`
-			VALUES ('$firstName', '$lastName', '$username', '$password', '$office')", $common);
+			$this->doQuery("INSERT INTO Proj2Advisors (`FirstName`, `LastName`, `Username`, `Password`, `Office`, `Meeting`
+			VALUES ('$firstName', '$lastName', '$username', '$password', '$office', '$meeting')", $common);
 			return true;
 		}
 	}
