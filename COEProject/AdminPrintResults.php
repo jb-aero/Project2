@@ -23,7 +23,7 @@ $debug = false;
 
 <?php
 
-	$date = strtotime($_POST["date"]);
+	$date = $_POST["date"];
 	$type = $_POST["type"];
 			
 	include('../CommonMethods.php');
