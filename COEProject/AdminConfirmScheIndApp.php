@@ -19,7 +19,6 @@ $COMMON = new Common($debug);
 		<h2>Appointments Created</h2><br>
 		<?php
 			$date = $_POST["Date"];
-			$location= $_POST["Location"];
 			$times = $_POST["time"];
 			$majors = $_POST["major"];
 			$repeatDays = $_POST["repeat"];
@@ -86,6 +85,7 @@ $COMMON = new Common($debug);
 			$id = $_SESSION['UserID'];
 			$adv = new Advisor($COMMON, $id);
 			$advID = $adv->getID();
+			$location = $adv->getMeeting();
 			//make sure app doesn't exist
 			//insert new app to DB
 			//print app
