@@ -55,7 +55,7 @@ class Appointment extends Base {
 	/* Static functions */
 	// Creates new appointment with given time, advisor ID, major, and student capacity.
 	// Returns false if advisor already exists, or true for successful insert
-	function createAppointment($common, $time, $advisorID, $major, $max) {
+	function createAppointment($common, $time, $advisorID, $major, $max, $meeting) {
 		// Check for already existing appointment
 		$rs = parent::doQuery("SELECT * FROM `Proj2Appointments` WHERE `Time` = '$time' AND `AdvisorID`='$advisorID'", $common);
 		if (mysql_num_rows($rs) > 0) {
@@ -63,8 +63,8 @@ class Appointment extends Base {
 			return false;
 		} else {
 			// Create new appointment
-			parent::doQuery("INSERT INTO `Proj2Appointments` (`Time`, `AdvisorID`, `Major`, `Max`)
-			VALUES ('$time', '$advisorID', '$major', '$max')", $common);
+			parent::doQuery("INSERT INTO `Proj2Appointments` (`Time`, `AdvisorID`, `Major`, `Max`, `Meeting`)
+			VALUES ('$time', '$advisorID', '$major', '$max', '$meeting')", $common);
 			return true;
 		}
 	}
