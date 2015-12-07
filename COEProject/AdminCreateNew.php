@@ -35,7 +35,7 @@
 		$user = strtoupper($_POST["UserN"]);
 		$pass = md5($_POST["PassW"]);
 		$office = $_POST["Office"];
-		$meeting = $_Post["Meeting"];
+		$meeting = $_POST["Meeting"];
 
 		include('../CommonMethods.php');
 		include('../Advisor.php');
