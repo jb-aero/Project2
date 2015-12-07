@@ -18,6 +18,7 @@ $COMMON = new Common($debug);
           <h2>Appointments Created</h2><br>
           <?php
             $date = $_POST["Date"];
+            $location = $_POST["Location"];
             $times = $_POST["time"];
             $majors = $_POST["major"];
             $repeatDays = $_POST["repeat"];
@@ -89,7 +90,7 @@ $COMMON = new Common($debug);
           //print app
           foreach($datetimes as $dt){
 		  	// Attempt to create appointment
-			$created = Appointment::createAppointment($COMMON, $dt, 0, $majorDB, $studentLimit);
+			$created = Appointment::createAppointment($COMMON, $dt, 0, $majorDB, $studentLimit, $location);
 		  	
             echo date('l, F d, Y g:i A', strtotime($dt)), "<br>Majors included: ", $majorPrint;
             echo("<br>Number of seats: $studentLimit");
