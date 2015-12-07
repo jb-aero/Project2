@@ -110,7 +110,7 @@ function displayIndividual($id, $date)
 	global $debug; global $COMMON;
 
         $sql = "SELECT `Time`, `Major`, `EnrolledID` FROM `Proj2Appointments` 
-        WHERE `Time` LIKE '$date%' AND `AdvisorID` = $id AND `MAX` = 1 ORDER BY `Time`";
+        WHERE `Time` LIKE '$date%' AND `AdvisorID`='$id' AND `MAX`=1 ORDER BY `Time`";
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
 	$matches = mysql_num_rows($rs); // see how many rows were collected by the query
 	if($debug) { echo("matches was $matches"); }
