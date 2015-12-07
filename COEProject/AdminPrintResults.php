@@ -27,17 +27,15 @@ $debug = false;
 	$type = $_POST["type"];
 			
 	include('../CommonMethods.php');
+	include<'../Advisor.php');
 	$COMMON = new Common($debug);
 
 
       $User = $_SESSION["UserN"];
-
-      $sql = "SELECT `id`, `firstName`, `lastName` FROM `Proj2Advisors` WHERE `Username` = '$User'";
-      $rs = $COMMON->executeQuery($sql, "Advising Appointments");
-      $row = mysql_fetch_row($rs);
-      $id = $row[0];
-      $FirstName = $row[1];
-      $LastName = $row[2];
+      $adv = new Advisor($COMMON, $User);
+      $id = $adv->getID();
+      $FirstName = $adv->getFirstName();
+      $LastName = $adv->getLastName();
 		
 			echo("<h2>Schedule for $FirstName $LastName<br>$date</h2>");
       $date = date('Y-m-d', strtotime($date));
