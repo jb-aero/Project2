@@ -124,7 +124,8 @@ function displayIndividual($id, $date)
 		echo("<tr>");
 		echo("<td>".date('g:i A', strtotime($row[0]))."</td>");
                 echo("<td>".$row[1]."</td>");
-	        $stud = new Student($COMMON,$row[2]);
+	        $stud = new Student($COMMON, $row[2]);
+	        echo($row[2]);
 		echo("<td>".$stud->getFirstName()." ".$stud->getLastName()."</td>");
 		echo("<td>".$stud->getStudentID()."</td>");
 		echo("</tr>");
