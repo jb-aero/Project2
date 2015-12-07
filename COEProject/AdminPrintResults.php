@@ -28,6 +28,7 @@ $debug = false;
 			
 	include('../CommonMethods.php');
 	include('../Advisor.php');
+	include('../Student.php');
 	$COMMON = new Common($debug);
 
 
@@ -124,11 +125,9 @@ function displayIndividual($id, $date)
 		echo("<tr>");
 		echo("<td>".date('g:i A', strtotime($row[0]))."</td>");
                 echo("<td>".$row[1]."</td>");
-	        $trdsql = "SELECT `FirstName`, `LastName` FROM `Proj2Students` WHERE `StudentID` = '$row[2]'";
-        		$trdrs = $COMMON->executeQuery($trdsql, "Advising Appointments");
-		$trdrow = mysql_fetch_row($trdrs);
-		echo("<td>".$trdrow[0]." ".$trdrow[1]."</td>");
-		echo("<td>".$row[2]."</td>");
+	        $stud = new Student($COMMON,$row[2]);
+		echo("<td>".$stud->getFirstName()." ".$stud->getLastName()."</td>");
+		echo("<td>".$stud->getStudentID()."</td>");
 		echo("</tr>");
 	}
         echo("</table><br><br>");
