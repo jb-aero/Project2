@@ -124,10 +124,19 @@ function displayIndividual($id, $date)
 		echo("<tr>");
 		echo("<td>".date('g:i A', strtotime($row[0]))."</td>");
                 echo("<td>".$row[1]."</td>");
+                if ($row[2]!=='')
+                {
                 $stud=$row[2];
 	        $student = new Student($COMMON, strtoupper($stud));
 	        $firstName= $student->getFirstName();
-		//echo("<td>".$r[0]." ".$r[1]."</td>");
+	        $lastName = $student->getLastName();
+	        echo($firstName);
+		echo("<td>".$firstName." ".$lastName."</td>");
+                }
+                else
+                {
+               		echo("<td></td>");
+                }
 		echo("<td>".$row[2]."</td>");
 		echo("</tr>");
 	}
