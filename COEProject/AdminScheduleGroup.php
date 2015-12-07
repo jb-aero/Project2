@@ -30,7 +30,7 @@ session_start();
 	    </div>
 	<div class="field">
 		<label for="Location">Location</label>
-		<input id="Location" type="text" required>
+		<input id="Location" type="text" name="Location" required>
 	</div>
       <div class="field">
         <label for="Time">Times</label>
