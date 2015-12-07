@@ -130,12 +130,10 @@ function displayIndividual($id, $date)
 	        	$student = new Student($COMMON, strtoupper($stud));
 	        	$firstName= $student->getFirstName();
 	        	$lastName = $student->getLastName();
-	        	echo($row[2]);
 			echo("<td>".$firstName." ".$lastName."</td>");
                 }
                 else
                 {
-                	echo ("EMPTY");
                		echo("<td></td>");
                 }
 		echo("<td>".$row[2]."</td>");
