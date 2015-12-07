@@ -92,7 +92,7 @@ $COMMON = new Common($debug);
 		  	// Attempt to create appointment
 			$created = Appointment::createAppointment($COMMON, $dt, 0, $majorDB, $studentLimit, $location);
 		  	
-            echo date('l, F d, Y g:i A', strtotime($dt)), "<br>Majors included: ", $majorPrint;
+            echo date('l, F d, Y g:i A', strtotime($dt)),"<br>Location: ",$location,"<br>Majors included: ", $majorPrint;
             echo("<br>Number of seats: $studentLimit");
             if(!$created){
 		      // Appointment already exists
