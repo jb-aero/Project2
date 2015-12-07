@@ -31,7 +31,7 @@ $debug = false;
 	$COMMON = new Common($debug);
 
 
-      $User = $_SESSION["UserN"];
+      $User = $_SESSION["UserID"];
       echo("USERNAME: " . $User);
       $adv = new Advisor($COMMON, $User);
       $id = $adv->getID();
