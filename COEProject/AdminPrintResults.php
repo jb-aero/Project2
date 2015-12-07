@@ -126,7 +126,7 @@ function displayIndividual($id, $date)
                 echo("<td>".$row[1]."</td>");
 	        $newq = "SELECT `FirstName`, `LastName`, FROM `Proj2Students` 
         WHERE `StudentID`='$row[2]'";
-		$jd = $COMMON->executeQuery($newq, "Advising Appointments");
+		$jd = $COMMON->executeQuery($newq, $_SERVER["SCRIPT_NAME"]");
 		$r = mysql_fetch_array($jd, MYSQL_NUM);
 		echo("<td>".$r[0]." ".$r[1]."</td>");
 		echo("<td>".$row[2]."</td>");
