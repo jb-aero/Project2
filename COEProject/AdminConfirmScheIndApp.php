@@ -90,7 +90,7 @@ $COMMON = new Common($debug);
 			foreach($datetimes as $dt){
 				// Attempt to create appointment
 				$created = Appointment::createAppointment($COMMON, $dt, $id, $majorDB, 1, $location);
-				echo date('l, F d, Y g:i A', strtotime($dt)),"<br>Location: ",$location," <br> Majors: ", $majorPrint;
+				echo date('l, F d, Y g:i A', strtotime($dt)),"<br>Advisor: ",$id,"<br>Location: ",$location," <br> Majors: ", $majorPrint;
 				if(!$created){
 					// Appointment already exists
 					echo "<br><span style='color:red'>!!</span>";
