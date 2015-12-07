@@ -28,7 +28,10 @@ session_start();
 
 	      <input id="Date" type="date" name="Date" placeholder="mm/dd/yyyy" min="2015-08-01" max="2015-10-30" required autofocus> (mm/dd/yyyy)
 	    </div>
-
+	<div class="field">
+		<label for="Location">Location</label>
+		<input id="Location" type="text" required>
+	</div>
       <div class="field">
         <label for="Time">Times</label>
         <input type="checkbox" name="time[]" value="08:00:00"> 8:00AM - 8:30AM <br>
