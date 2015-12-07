@@ -29,7 +29,7 @@ session_start();
             $COMMON = new Common($debug);
 
 			// Get all group appointments from database
-			$appointments = Appointment::searchAppointments($COMMON, 0, null, null, null, false, -1, '');
+			$appointments = Appointment::searchAppointments($COMMON, 0, null, null, null, true, -1, '');
 			//first item in row
             if(count($appointments) > 0){
               echo("<form action=\"AdminProcessEditGroup.php\" method=\"post\" name=\"Confirm\">");
