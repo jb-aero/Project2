@@ -124,7 +124,7 @@ function displayIndividual($id, $date)
 		echo("<tr>");
 		echo("<td>".date('g:i A', strtotime($row[0]))."</td>");
                 echo("<td>".$row[1]."</td>");
-                if ($row[2] != "")
+                if (strlen($row[2]) > 0)
                 {
         	 	$stud=$row[2];
 	        	$student = new Student($COMMON, strtoupper($stud));
