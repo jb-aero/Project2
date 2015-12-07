@@ -126,12 +126,11 @@ function displayIndividual($id, $date)
                 echo("<td>".$row[1]."</td>");
                 if (strlen($row[2]) > 0)
                 {
-                	echo("NOT EMPTY");
         	 	$stud=$row[2];
 	        	$student = new Student($COMMON, strtoupper($stud));
 	        	$firstName= $student->getFirstName();
 	        	$lastName = $student->getLastName();
-	        	echo($firstName);
+	        	echo($row[2]);
 			echo("<td>".$firstName." ".$lastName."</td>");
                 }
                 else
