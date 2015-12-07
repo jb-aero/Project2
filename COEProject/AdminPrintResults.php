@@ -125,9 +125,9 @@ function displayIndividual($id, $date)
 		echo("<td>".date('g:i A', strtotime($row[0]))."</td>");
                 echo("<td>".$row[1]."</td>");
 	        $stud = new Student($COMMON, $row[2]);
-	        $firstN = $stud->getFirstName();
-	        $lastN = $stud->getLastName();
-		echo("<td>".$firstN." ".$lastN"</td>");
+	        $firstName = $stud->getFirstName();
+	        $lastName = $stud->getLastName();
+		echo("<td>".$firstName." ".$lastName"</td>");
 		echo("<td>".$row[2]."</td>");
 		echo("</tr>");
 	}
