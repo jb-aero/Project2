@@ -135,6 +135,7 @@ function displayIndividual($id, $date)
                 }
                 else
                 {
+                	echo ("EMPTY");
                		echo("<td></td>");
                 }
 		echo("<td>".$row[2]."</td>");
