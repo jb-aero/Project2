@@ -127,7 +127,6 @@ function displayIndividual($id, $date)
 	        $stud = new Student($COMMON, $row[2]);
 	        $firstName = $stud->getFirstName();
 	        $lastName = $stud->getLastName();
-	        $echo($firstName);
 		//echo("<td>".$firstName." ".$lastName"</td>");
 		echo("<td>".$row[2]."</td>");
 		echo("</tr>");
