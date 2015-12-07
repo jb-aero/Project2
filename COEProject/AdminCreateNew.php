@@ -35,6 +35,7 @@
 		$user = strtoupper($_POST["UserN"]);
 		$pass = md5($_POST["PassW"]);
 		$office = $_POST["Office"];
+		$meeting = $_Post["Meeting"];
 
 		include('../CommonMethods.php');
 		include('../Advisor.php');
@@ -43,7 +44,7 @@
 		$Common = new Common($debug);
 		$advisor = new Advisor($Common, $user);
 			
-      if (Advisor::createAdvisor($Common, $first, $last, $user, $pass, $office)) {
+      if (Advisor::createAdvisor($Common, $first, $last, $user, $pass, $office, $meeting)) {
 		echo("<h2>New Advisor has been created:</h2>");
         echo ("<h3>$first $last<h3>");
       }
