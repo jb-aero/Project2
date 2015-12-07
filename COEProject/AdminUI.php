@@ -53,10 +53,10 @@ $COMMON = new Common($debug);
 	    ?>
       </div>
     </div>
-	</div>
+	
 
 	<?php include('./workOrder/workButton.php'); ?>
-
+</div>
 </body>
   
 </html>
