@@ -52,10 +52,10 @@ $COMMON = new Common($debug);
 		  include('../Footer.html')
 	    ?>
       </div>
-    </div>
 	
 
 	<?php include('./workOrder/workButton.php'); ?>
+</div>
 </div>
 </body>
   
