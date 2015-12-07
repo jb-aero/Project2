@@ -55,6 +55,10 @@ session_start();
 	     		<label for="Office">Office Location</label>
 	      		<input id="Office" size="20" maxlength="9" type="text" name="Office" required>
 	   	</div>
+	   	<div class="field">
+	   		<label for="Meeting">Meeting Location</label>
+	   		<input id="Meeting" type="text" name="Meeting" required>
+	   	</div>
 
 		<div class="field">
 	     		<label for="PassW">Password</label>
