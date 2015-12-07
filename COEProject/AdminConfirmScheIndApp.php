@@ -18,6 +18,7 @@ $COMMON = new Common($debug);
 		<h2>Appointments Created</h2><br>
 		<?php
 			$date = $_POST["Date"];
+			$location= $_POST["Location"];
 			$times = $_POST["time"];
 			$majors = $_POST["major"];
 			$repeatDays = $_POST["repeat"];
@@ -88,8 +89,8 @@ $COMMON = new Common($debug);
 			//print app
 			foreach($datetimes as $dt){
 				// Attempt to create appointment
-				$created = Appointment::createAppointment($COMMON, $dt, $id, $majorDB, 1);
-				echo date('l, F d, Y g:i A', strtotime($dt)), " <br> Majors: ", $majorPrint;
+				$created = Appointment::createAppointment($COMMON, $dt, $id, $majorDB, 1, $location);
+				echo date('l, F d, Y g:i A', strtotime($dt)),"<br>Location: ",$location," <br> Majors: ", $majorPrint;
 				if(!$created){
 					// Appointment already exists
 					echo "<br><span style='color:red'>!!</span>";
