@@ -27,7 +27,7 @@ $debug = false;
 	$type = $_POST["type"];
 			
 	include('../CommonMethods.php');
-	include<'../Advisor.php');
+	include('../Advisor.php');
 	$COMMON = new Common($debug);
 
 
