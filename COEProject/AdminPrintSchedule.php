@@ -23,8 +23,8 @@ session_start();
 	  <form action="AdminPrintResults.php" method="post" name="Today">
 	  	<?php
 	  	$date = date('m/d/Y');
-	  		echo("<input type='hidden' name='date' value='$date'");
-	  		echo("<input type='hidden' name='type' value='Both'");
+	  		echo("<input type='hidden' name='date' value='$date'>");
+	  		echo("<input type='hidden' name='type' value='Both'>");
 	  	?>
 	  	<div class="nextButton">
 	  		<input type="submit" name="next" class="button large go" value="Print Today's Schedule">
