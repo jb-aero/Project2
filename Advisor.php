@@ -3,12 +3,9 @@ require_once 'Base.php';
 class Advisor extends Base {
 	function Advisor($common, $id, $pass=null) {
 		// Get record from Proj2Advisors table with the given id
-		echo("ID TYPE: ");
-		echo(gettype($id));
-		echo("<br>");
-		if (gettype($id)=="integer")
+		if (is_numeric($id))
 		{
-			parent::Base($common,$id, 'Proj2Advisors', 'id');
+			parent::Base($common,$id, 'Proj2Advisor', 'id');
 		}
 		else if ($pass == null)
 		{
