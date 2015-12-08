@@ -3,7 +3,11 @@ require_once 'Base.php';
 class Advisor extends Base {
 	function Advisor($common, $id, $pass=null) {
 		// Get record from Proj2Advisors table with the given id
-		if ($pass == null)
+		if (gettype($id)=="integer")
+		{
+			parent::Base($common,$id, 'Proj2Advisors', 'id');
+		}
+		else if ($pass == null)
 		{
 			// Already signed in
 			parent::Base($common, $id, 'Proj2Advisors', 'Username');
