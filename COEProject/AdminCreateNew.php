@@ -1,7 +1,5 @@
 <?php
   session_start();
-  include('../CommonMethods.php');
-  include('../Advisor.php');
 ?>
 
 <!DOCTYPE html>
@@ -15,39 +13,36 @@
 	alert("Value: " + stepVal);
     }
     </script>
-  <link rel='stylesheet' type='text/css' href='../css/standard.css'/>
+   <link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head>
   <body>
     <div id="login">
       <div id="form">
         <div class="top">
-        <?php
-	$_SESSION["PassCon"] = false;
-	$first = $_POST["firstN"];
-	$last = $_POST["lastN"];
-	$user = strtoupper($_POST["UserN"]);
-	$pass = md5($_POST["PassW"]);
-	$office = $_POST["Office"];
-	$meeting = $_POST["Meeting"];
-	echo($first);
-	$debug = false;
-	$COMMON = new Common($debug);
-	$userN = $_SESSION["UserID"];
-	$adv = new Advisor($COMMON,$userN);
-	if ($_POST["PassW"] != $_POST["ConfP"]) {
-		$_SESSION["PassCon"] = true;
-		header('Location: AdminCreateNewAdv.php');
-	}
-	elseif ($_POST["PassW"] == $_POST["ConfP"]) {
-			
-      	if ($adv->createAdvisor($COMMON, $first, $last, $user, $pass, $office, $meeting)) {
-		echo("<h2>New Advisor has been created:</h2>");
-        	echo ("<h3>$first $last<h3>");
+		<h2>New Advisor has been created:</h2>
+
+		<?php
+			$first = $_SESSION["AdvF"];
+			$last = $_SESSION["AdvL"];
+			$user = $_SESSION["AdvUN"];
+			$pass = $_SESSION["AdvPW"];
+
+			include('../CommonMethods.php');
+			$debug = false;
+			$Common = new Common($debug);
+
+      $sql = "SELECT * FROM `Proj2Advisors` WHERE `Username` = '$user' AND `FirstName` = '$first' AND  `LastName` = '$last'";
+      $rs = $Common->executeQuery($sql, "Advising Appointments");
+      $row = mysql_fetch_row($rs);
+      if($row){
+        echo("<h3>Advisor $first $last already exists</h3>");
       }
-     else {
-       echo("<h3>Advisor $first $last already exists</h3>");
-    	}
-    }
+      else{
+  			$sql = "INSERT INTO `Proj2Advisors`(`FirstName`, `LastName`, `Username`, `Password`) 
+  			VALUES ('$first', '$last', '$user', '$pass')";
+        echo ("<h3>$first $last<h3>");
+        $rs = $Common->executeQuery($sql, "Advising Appointments");
+      }
 		?>
 		<form method="link" action="AdminUI.php">
 			<input type="submit" name="next" class="button large go" value="Return to Home">
