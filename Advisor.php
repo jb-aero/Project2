@@ -5,7 +5,7 @@ class Advisor extends Base {
 		// Get record from Proj2Advisors table with the given id
 		if (is_numeric($id))
 		{
-			parent::Base($common,intval($id), 'Proj2Advisor', 'id');
+			parent::Base($common,intval($id), 'Proj2Advisors', 'id');
 		}
 		else if ($pass == null)
 		{
