@@ -1,5 +1,7 @@
 <?php
   session_start();
+  include('../CommonMethods.php');
+  include('../Advisor.php');
 ?>
 
 <!DOCTYPE html>
@@ -36,14 +38,12 @@
 		$pass = md5($_POST["PassW"]);
 		$office = $_POST["Office"];
 		$meeting = $_POST["Meeting"];
-		include('../CommonMethods.php');
-		include('../Advisor.php');
 		echo($first);
 		$debug = false;
 		$COMMON = new Common($debug);
 		$advisor = new Advisor($COMMON, $user);
 			
-      if ($advisor->createAdvisor($COMMON, $first, $last, $user, $pass, $office, $meeting)) {
+      //if ($advisor->createAdvisor($COMMON, $first, $last, $user, $pass, $office, $meeting)) {
 		echo("<h2>New Advisor has been created:</h2>");
         echo ("<h3>$first $last<h3>");
       }
