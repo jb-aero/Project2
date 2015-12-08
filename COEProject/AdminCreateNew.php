@@ -21,10 +21,7 @@
     <div id="login">
       <div id="form">
         <div class="top">
-		
-
-		<?php
-		
+        <?php
 	$_SESSION["PassCon"] = false;
 	$first = $_POST["firstN"];
 	$last = $_POST["lastN"];
@@ -35,20 +32,21 @@
 	echo($first);
 	$debug = false;
 	$COMMON = new Common($debug);
-	$advisor = new Advisor($COMMON, $user);
+	$userN = $_SESSION["UserID"];
+	$adv = new Advisor($COMMON,$userN);
 	if ($_POST["PassW"] != $_POST["ConfP"]) {
 		$_SESSION["PassCon"] = true;
 		header('Location: AdminCreateNewAdv.php');
 	}
 	elseif ($_POST["PassW"] == $_POST["ConfP"]) {
 			
-      if ($advisor->createAdvisor($COMMON, $first, $last, $user, $pass, $office, $meeting)) {
+      	if ($adv->createAdvisor($COMMON, $first, $last, $user, $pass, $office, $meeting)) {
 		echo("<h2>New Advisor has been created:</h2>");
-        echo ("<h3>$first $last<h3>");
+        	echo ("<h3>$first $last<h3>");
       }
      else {
        echo("<h3>Advisor $first $last already exists</h3>");
-    }
+    	}
     }
 		?>
 		<form method="link" action="AdminUI.php">
