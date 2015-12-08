@@ -22,7 +22,7 @@ session_start();
 		      <h1>Print Schedule</h1>
 	  <form action="AdminPrintResults.php" method="post" name="Today">
 	  	<?php
-	  	$date = date('m/d/y');
+	  	$date = date('m/d/Y');
 	  		echo("<input type='hidden' name='date' value='$date'");
 	  	?>
 	  	<div class="nextButton">
