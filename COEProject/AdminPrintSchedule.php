@@ -20,6 +20,15 @@ session_start();
       <div id="form">
         <div class="top">
 		      <h1>Print Schedule</h1>
+	  <form action="AdminPrintResults.php" method="post" name="Today">
+	  	<?php
+	  	$date = date('mm/dd/yyyy');
+	  		echo("<input type='hidden' name='date' value='$date'");
+	  	?>
+	  	<div class="nextButton">
+	  		<input type="submit" name="next" class="button large go" value="Print Today's Schedule">
+	  	</div>
+	  </form>
           <form action="AdminPrintResults.php" method="post" name="Confirm">
 	         <div class="field">
 	     	     <label for="date">Date</label>
