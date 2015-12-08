@@ -24,7 +24,7 @@ session_start();
 	  	<?php
 	  	$date = date('m/d/Y');
 	  		echo("<input type='hidden' name='date' value='$date'");
-	  		echo("<input type='hidden' name='type' value='both'");
+	  		echo("<input type='hidden' name='type' value='Both'");
 	  	?>
 	  	<div class="nextButton">
 	  		<input type="submit" name="next" class="button large go" value="Print Today's Schedule">
