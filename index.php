@@ -1,5 +1,5 @@
 <?php
-header("Location: StudentAdminSignIn.html");
+header("Location: COEProject/StudentAdminSignIn.html");
 
 // I changed this since most of the time students will be logging in - not admin
 // Lupoli 8/18/15
