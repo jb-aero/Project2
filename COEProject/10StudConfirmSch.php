@@ -76,6 +76,9 @@ session_start();
 				// Individual advisor, so get info from database
 				$currentAdvisor = new Advisor($COMMON, $currentAdvisorID);
 				$currentAdvisorName = $currentAdvisor->convertFullName();
+				echo("<br>");
+				echo("NAME: ");
+				echo($currentAdvisorName);
 				$currentAdvisorOffice = $currentAdvisor->getMeeting();
 			}
 			else{
