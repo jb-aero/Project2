@@ -36,6 +36,7 @@
 	$userN = $_SESSION["User_ID"];
 	$adv = new Advisor($Common,$userN);
       if ($adv->createAdvisor($Common,$first,$last,$user,$pass,$office,$meeting))
+      {
         echo("<h3>Advisor $first $last created successfully</h3>");
       }
       else{
