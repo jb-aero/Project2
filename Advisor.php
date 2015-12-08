@@ -5,6 +5,8 @@ class Advisor extends Base {
 		// Get record from Proj2Advisors table with the given id
 		if (gettype($id)=="integer")
 		{
+			echo("INTEGER");
+			echo("<br>");
 			parent::Base($common,$id, 'Proj2Advisors', 'id');
 		}
 		else if ($pass == null)
