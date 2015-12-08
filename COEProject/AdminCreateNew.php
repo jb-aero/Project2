@@ -30,6 +30,7 @@
 			$pass = $_SESSION["PassW"];
 
 			include('../CommonMethods.php');
+			include('../Advisor.php');
 			$debug = false;
 			$Common = new Common($debug);
 
