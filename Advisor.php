@@ -59,8 +59,8 @@ class Advisor extends Base {
 			return false;
 		} else {
 			// Advisor does not exist, so create it
-			$this->doQuery("INSERT INTO Proj2Advisors (`FirstName`, `LastName`, `Username`, `Password`, `Office`, `Meeting`)
-			VALUES ('$firstName', '$lastName', '$username', '$password', '$office', '$meeting')", $common);
+			$this->doQuery("INSERT INTO Proj2Advisors (`id`, `FirstName`, `LastName`, `Username`, `Password`, `Office`, `Meeting`)
+			VALUES ('','$firstName', '$lastName', '$username', '$password', '$office', '$meeting')", $common);
 			return true;
 		}
 	}
