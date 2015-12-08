@@ -119,7 +119,7 @@ function stage2($_POST)
 <?php
 
 	        $message =  "From: ".$_SESSION['userN']."\n\r Priority: ".$_POST['priority']."\n\r ".$_POST['description'];
-                mail("slupoli@umbc.edu", "Work Order for COE Advising", $message);
+                mail("carrico3@umbc.edu", "Work Order for COE Advising", $message);
 
 }
 ?>
