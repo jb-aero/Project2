@@ -38,7 +38,7 @@
 		$meeting = $_POST["Meeting"];
 		include('../CommonMethods.php');
 		include('../Advisor.php');
-		
+		echo($first);
 		$debug = false;
 		$COMMON = new Common($debug);
 		$advisor = new Advisor($COMMON, $user);
