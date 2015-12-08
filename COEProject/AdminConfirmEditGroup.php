@@ -43,7 +43,7 @@ $debug = false;
             echo("<h1>Removed Appointment</h1><br>");
 
             $stds = $appt->getEnrolledID();
-			echo($stds);
+			echo($stds, "<br>");
 	   		$stds = trim($stds); // had some side white spaces sometimes
 	   		$stds = split(" ", $stds);
 
