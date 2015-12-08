@@ -40,7 +40,7 @@ session_start();
 					// Individual advisor - get info from database
 					$oldAdvisor = new Advisor($COMMON, $oldAdvisorID);
 					$oldAdvisorName = $oldAdvisor->convertFullName();
-					$oldAdvisorOffice = $oldAdvisor->getOffice();
+					$oldAdvisorOffice = $oldAdvisor->getMeeting();
 				}
 				else{
 					// Group adivising
@@ -74,7 +74,7 @@ session_start();
 				// Individual advisor, so get info from database
 				$currentAdvisor = new Advisor($COMMON, $currentAdvisorID);
 				$currentAdvisorName = $currentAdvisor->convertFullName();
-				$currentAdvisorOffice = $currentAdvisor->getOffice();
+				$currentAdvisorOffice = $currentAdvisor->getMeeting();
 			}
 			else{
 				// Group advising appointment
