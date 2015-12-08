@@ -62,12 +62,6 @@ session_start();
 			}
 			
 			$currentAdvisorID = $_POST["advisor"];
-			$currentAdvisor = new Advisor($COMMON, $currentAdvisorID);
-			$currentAdvisorName = $currentAdvisor->convertFullName();
-			echo("NAME:");
-			echo($currentAdvisorName);
-			echo("ADVISOR: ");
-			echo($currentAdvisorID);
 			$currentDatephp = strtotime($_POST["appTime"]);
 			
 			// Get appointment information for current appointment, even if it's taken
@@ -82,7 +76,7 @@ session_start();
 				echo("<br>");
 				echo("NAME: ");
 				echo($currentAdvisorName);
-				$currentAdvisorOffice = $currentAdvisor->getMeeting();
+				$currentAdvisorOffice = $currentAdvisor->getOffice();
 			}
 			else{
 				// Group advising appointment
