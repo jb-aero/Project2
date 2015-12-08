@@ -22,12 +22,12 @@
       <div id="form">
         <div class="top">
 		<?php
-			$first = $_POST["firstName"];
-			$last = $_POST["lastName"];
+			$first = $_POST["firstN"];
+			$last = $_POST["lastN"];
 			$office = $_POST["Office"];
 			$meeting = $_POST["Meeting"];
-			$user = $_Post["UserN"];
-			$pass = $_SESSION["PassW"];
+			$user = $_POST["UserN"];
+			$pass = $_POST["PassW"];
 
 			include('../CommonMethods.php');
 			include('../Advisor.php');
