@@ -63,6 +63,8 @@ session_start();
 			
 			$currentAdvisorName;
 			$currentAdvisorID = $_POST["advisor"];
+			echo("ADVISOR: ");
+			echo($currentAdvisorID);
 			$currentDatephp = strtotime($_POST["appTime"]);
 			
 			// Get appointment information for current appointment, even if it's taken
