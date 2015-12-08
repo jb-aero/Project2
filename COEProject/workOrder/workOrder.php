@@ -82,7 +82,7 @@ function stage2($_POST)
 {
 	global $debug;
 
-	include('../CommonMethods.php');
+	include('../../CommonMethods.php');
 	$COMMON = new Common($debug);
 
       $sql = "insert into `work_orders` (`id`, `url`, `description`, `priority`, `author`, `time_entered`) values (null, '".$_POST['url']."', '".$_POST['description']."', '".$_POST['priority']."', '".$_SESSION['UserN']."', CURRENT_TIMESTAMP)";
@@ -100,7 +100,7 @@ function stage2($_POST)
 	alert("Value: " + stepVal);
     }
     </script>
-	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
+	<link rel='stylesheet' type='text/css' href='../../css/standard.css'/>
   </head>
   <body>
     <div id="login">
