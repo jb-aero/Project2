@@ -8,22 +8,6 @@ session_start();
     <meta charset="UTF-8" />
     <title>Create New Admin</title>
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
-
-     <script type="text/javascript">
-    //   window.onload = function () {
-    //       document.getElementById("PassW").onchange = validatePassword;
-    //       document.getElementById("ConfP").onchange = validatePassword;
-    //   }
-    //   function validatePassword(){
-    //     var pass2=document.getElementById("ConfP").value;
-    //     var pass1=document.getElementById("PassW").value;
-    //     if(pass1!=pass2)
-    //         document.getElementById("ConfP").setCustomValidity("Passwords Don't Match");
-    //     else
-    //         document.getElementById("PassW").setCustomValidity('');  
-    //     //empty string means no validation error
-    //   }
-    // </script>
   </head>
    <body>
     <div id="login">
@@ -44,21 +28,19 @@ session_start();
 	    	<div class="field">
 	     		<label for="lastN">Last Name</label>
 	      		<input id="lastN" size="20" maxlength="50" type="text" name="lastN" required>
-	   	</div>
-
+	   	</div>	
+		<div class="field">
+			<label for="Office">Office Location</label>
+			<input id="Office" size="20" maxlength="50" type="text" name="Office" required>
+		</div>
+		<div class="field">
+			<label for="Meeting">Meeting Location</label>
+			<input id="Meeting" size="20" maxlength="50" type="text" name="Meeting" required>
+		</div>
 		<div class="field">
 	     		<label for="UserN">Username</label>
 	      		<input id="UserN" size="20" maxlength="50" type="text" name="UserN" required>
-	   	</div>
-
-		<div class="field">
-	     		<label for="Office">Office Location</label>
-	      		<input id="Office" size="20" maxlength="9" type="text" name="Office" required>
-	   	</div>
-	   	<div class="field">
-	   		<label for="Meeting">Meeting Location</label>
-	   		<input id="Meeting" type="text" name="Meeting" required>
-	   	</div>
+	   	</div>	 
 
 		<div class="field">
 	     		<label for="PassW">Password</label>
