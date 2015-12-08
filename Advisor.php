@@ -38,9 +38,6 @@ class Advisor extends Base {
 		return $this->getInfo('Office');
 	}
 	
-	function getMeeting() {
-		return $this->getInfo('Meeting');
-	}
 	
 	/* Conversion functions */
 	function convertFullName() {
