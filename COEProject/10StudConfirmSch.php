@@ -61,8 +61,11 @@ session_start();
 				echo "<input type='hidden' name='oldAppID' value='$oldApptID'>";
 			}
 			
-			$currentAdvisorName;
 			$currentAdvisorID = $_POST["advisor"];
+			$currentAdvisor = new Advisor($COMMON, $currentAdvisorID);
+			$currentAdvisorName = $currentAdvisor->convertFullName();
+			echo("NAME:");
+			echo($currentAdvisorName);
 			echo("ADVISOR: ");
 			echo($currentAdvisorID);
 			$currentDatephp = strtotime($_POST["appTime"]);
