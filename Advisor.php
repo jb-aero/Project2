@@ -52,7 +52,8 @@ class Advisor extends Base {
 	// the given first name, last name, and user name. Returns true on successful insert.
 	function createAdvisor($common, $firstName, $lastName, $username, $password, $office, $meeting) {
 		// Check if advisor already exists
-		echo("CREATE: ",$firstName);
+		echo("CREATE: ");
+		echo($firstName);
 		$rs = $this->doQuery("SELECT `id` FROM Proj2Advisors WHERE `FirstName`='$firstName' AND
 		`LastName`='$lastName' AND `Username`='$username'", $common);
 		if (mysql_num_rows($rs) > 0) {
