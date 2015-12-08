@@ -85,7 +85,7 @@ function stage2($_POST)
 	include('../../CommonMethods.php');
 	$COMMON = new Common($debug);
 
-      $sql = "insert into `work_orders` (`id`, `url`, `description`, `priority`, `author`, `time_entered`) values (null, '".$_POST['url']."', '".$_POST['description']."', '".$_POST['priority']."', '".$_SESSION['UserN']."', CURRENT_TIMESTAMP)";
+      $sql = "insert into `work_orders` (`id`, `url`, `description`, `priority`, `author`, `time_entered`) values (null, '".$_POST['url']."', '".$_POST['description']."', '".$_POST['priority']."', '".$_SESSION['UserID']."', CURRENT_TIMESTAMP)";
       $rs = $COMMON->executeQuery($sql, $_SERVER['SCRIPT_NAME']);
 ?>
 
@@ -118,7 +118,7 @@ function stage2($_POST)
 
 <?php
 
-	        $message =  "From: ".$_SESSION['userN']."\n\r Priority: ".$_POST['priority']."\n\r ".$_POST['description'];
+	        $message =  "From: ".$_SESSION['UserID']."\n\r Priority: ".$_POST['priority']."\n\r ".$_POST['description'];
                 mail("carrico3@umbc.edu", "Work Order for COE Advising", $message);
 
 }
