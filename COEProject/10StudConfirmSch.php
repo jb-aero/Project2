@@ -72,10 +72,7 @@ session_start();
 			if($currentAdvisorID != 0){
 				// Individual advisor, so get info from database
 				$currentAdvisor = new Advisor($COMMON, $currentAdvisorID);
-				$currentAdvisorName = $currentAdvisor->getFirstName();
-				echo("<br>");
-				echo("NAME: ");
-				echo($currentAdvisorName);
+				$currentAdvisorName = $currentAdvisor->convertFullName();
 				$currentAdvisorOffice = $currentAdvisor->getOffice();
 			}
 			else{
