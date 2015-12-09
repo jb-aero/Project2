@@ -47,6 +47,7 @@ session_start();
             echo("Number of students enrolled: ".$appt->getEnrolledNum()." <br>");
             echo("Location: ");
             echo($appt->getMeeting());
+            echo("<br>");
             echo("Student limit: ");
             echo("<input type=\"number\" id=\"stepper\" name=\"stepper\" min=\"".$appt->getEnrolledNum()."\" max=\"".$appt->getMax()."\" value=\"".$appt->getMax()."\" />");
             echo("<br><br>");
