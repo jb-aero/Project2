@@ -38,7 +38,7 @@ session_start();
 		</form>
 		</div>
 		<?php
-		  include('../Footer.html')
+		  include('../Footer.html');
 	    ?>
       </div>
     </div>

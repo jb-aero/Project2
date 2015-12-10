@@ -57,7 +57,10 @@ $debug = false;
 	</form>
 
 	</div>
-	</div>
+	<?php
+	  include('../Footer.html');
+	?>
+  </div>
 	<?php include('./workOrder/workButton.php'); ?>
 	</div>
 

@@ -96,7 +96,10 @@ session_start();
 	<div class="bottom">
 		<p style='color:red'>Please note that individual appointments can only be removed from schedule.</p>
 	</div>
-	</div>
+		<?php
+		  include('../Footer.html');
+	    ?>
+  </div>
 	<?php include('./workOrder/workButton.php'); ?>
 
 	</div>

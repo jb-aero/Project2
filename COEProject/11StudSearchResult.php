@@ -100,7 +100,7 @@ $COMMON = new Common($debug);
 		<p>If the Major category is followed by a blank, then it is open for all majors.</p>
 		</div>
 		<?php
-		  include('../Footer.html')
+		  include('../Footer.html');
 	    ?>
       </div>
     </div>

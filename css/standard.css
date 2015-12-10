@@ -161,7 +161,8 @@ html{
       	background-color: #cc0000;
       	color: #FFF;
 		position: relative;
-		left: 500px;
+		left: 550px;
+		margin-bottom: 20px;
       }
       
       .button.logout:hover {

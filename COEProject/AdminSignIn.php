@@ -37,8 +37,10 @@ session_start();
 	    <div class="nextButton">
 			<input type="submit" name="next" class="button large go" value="Next">
 	    </div>
+		</form>
+		</div>
+      </div>
 	</div>
-	</form>
   </body>
   
 </html>

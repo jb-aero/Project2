@@ -55,7 +55,7 @@ $student = new Student($COMMON, $_SESSION["studID"]);
         </div>
 		</div>
 		<?php
-		  include('../Footer.html')
+		  include('../Footer.html');
 	    ?>
       </div>
     </div>

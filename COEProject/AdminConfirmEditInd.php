@@ -75,8 +75,7 @@ session_start();
 				<input type="submit" name="home" class="button large go" value="Return to Home">
 			</form>
 		</div>
-    </div>    
-	</div>
+    </div>
 	<div class="bottom">
 		<?php
 		if($appt->getEnrolledID()){
@@ -84,8 +83,11 @@ session_start();
         }
 		?>
 	</div>
-	</div>
-	</form>
+		<?php
+		  include('../Footer.html');
+	    ?>
+      </div>
+    </div>
   </body>
   
 </html>

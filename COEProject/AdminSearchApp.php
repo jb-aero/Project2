@@ -87,15 +87,18 @@ $COMMON = new Common($debug);
 	<div class="nextButton">
 			<input type="submit" name="go" class="button large go" value="Go">
 	</div>
-	</div>
 	</form>
-	<br>
+	</div>
 	<br>
 	<form method="link" action="AdminUI.php">
 	<input type="submit" name="next" class="button large go" value="Return to Home">
 	</form>
-	<?php include('./workOrder/workButton.php'); ?>
-
+		<?php
+		  include('../Footer.html');
+	      include('./workOrder/workButton.php');
+		?>
+      </div>
+    </div>
   </body>
   
 </html>

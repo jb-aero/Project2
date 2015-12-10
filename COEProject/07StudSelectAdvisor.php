@@ -38,7 +38,7 @@ $COMMON = new Common($debug);
 		</form>
 		</div>
 		<?php
-		  include('../Footer.html')
+		  include('../Footer.html');
 	    ?>
       </div>
     </div>

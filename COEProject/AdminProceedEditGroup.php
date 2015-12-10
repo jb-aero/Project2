@@ -63,10 +63,13 @@ session_start();
             }
             echo("</div>");
           ?>
-		  </div>
-  </div>
-  </div>
-  </form>
+		</form>
+		</div>
+		<?php
+		  include('../Footer.html');
+	    ?>
+      </div>
+    </div>
   </body>
   
 </html>

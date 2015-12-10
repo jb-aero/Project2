@@ -47,10 +47,12 @@
 		<form method="link" action="AdminUI.php">
 			<input type="submit" name="next" class="button large go" value="Return to Home">
 		</form>
-	</div>
-	</div>
-	</div>
-	</form>
+		</div>
+		<?php
+		  include('../Footer.html');
+	    ?>
+      </div>
+    </div>
   </body>
   
 </html>

@@ -19,7 +19,7 @@ session_start();
 	<form method="post" action="AdminProcessEdit.php">
 	<div class="nextButton">
 		<input type="submit" name="next" class="button large go" value="Individual">
-		<input type="submit" name="next" class="button large go" value="Group">
+		<input type="submit" name="next" class="button large go" value="Group" style="float: right;">
 	</div>
 	</form>
         </div>
@@ -29,10 +29,13 @@ session_start();
 	<form method="link" action="AdminUI.php">
 	<input type="submit" name="next" class="button large go" value="Return to Home">
 	</form>
-         
-        </div>
-	</div>
-		
+
+		</div>
+		<?php
+		  include('../Footer.html');
+	    ?>
+      </div>
+    </div>
   </body>
   
 </html>

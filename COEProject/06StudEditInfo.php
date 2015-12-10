@@ -94,7 +94,7 @@ $student = new Student($COMMON, $_SESSION["studID"]);
 		</form>
 		</div>
 		<?php
-		  include('../Footer.html')
+		  include('../Footer.html');
 	    ?>
       </div>
     </div>

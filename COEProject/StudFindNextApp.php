@@ -76,8 +76,8 @@ else
       <div class="nextButton">
   <input type="submit" name="done" class="button large go" value="Done">
   </div>
-  </div>
   </form>
+  </div>
  </body>
 </html>
 <?php

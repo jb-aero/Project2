@@ -74,8 +74,11 @@ session_start();
             }
           ?>
   </div>
-  </div>
-  </div>
+		</div>
+		<?php
+		  include('../Footer.html');
+	    ?>
+      </div>
 	<?php include('./workOrder/workButton.php'); ?>
   </div>
   </body>

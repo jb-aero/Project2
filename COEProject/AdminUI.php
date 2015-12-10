@@ -56,7 +56,6 @@ $COMMON = new Common($debug);
 
 	<?php include('./workOrder/workButton.php'); ?>
 </div>
-</div>
 </body>
   
 </html>
