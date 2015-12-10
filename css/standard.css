@@ -160,6 +160,8 @@ html{
       .button.logout {
       	background-color: #cc0000;
       	color: #FFF;
+		position: relative;
+		left: 500px;
       }
       
       .button.logout:hover {
